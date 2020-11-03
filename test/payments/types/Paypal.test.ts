@@ -41,7 +41,7 @@ describe('Payment Type Paypal Test', () => {
     const recurring: Recurring = await heidelpay.startRecurring(paypal.getId(), TestHelper.getRequiredRecurringData())
 
     expect(recurring).toBeInstanceOf(Recurring)
-    expect(recurring.getReturnUrl()).toBe('https://dev.heidelpay.com')
+    expect(recurring.getReturnUrl()).toBe('https://dev.unzer.com')
     expect(recurring.getRedirectUrl()).toBeDefined()
     expect(recurring.getProcessing).toBeDefined()
   })
@@ -51,7 +51,7 @@ describe('Payment Type Paypal Test', () => {
     const recurring: Recurring = await heidelpay.startRecurring(paypal.getId(), TestHelper.getCompleteRecurringData())
 
     expect(recurring).toBeInstanceOf(Recurring)
-    expect(recurring.getReturnUrl()).toBe('https://dev.heidelpay.com')
+    expect(recurring.getReturnUrl()).toBe('https://dev.unzer.com')
     expect(recurring.getRedirectUrl()).toBeDefined()
     expect(recurring.getResources().getCustomerId()).toBeDefined()
     expect(recurring.getResources().getMetadataId()).toBeDefined()

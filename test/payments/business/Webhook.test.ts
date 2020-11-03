@@ -124,7 +124,7 @@ describe('Webhook test', () => {
     const oldWebhookUrl = webhook.getUrl()
     const updatedWebhook = await heidelpay.updateWebhook(
       webhookId,
-      { url: `http://heidelpay.com/${Date.now()}` },
+      { url: `http://unzer.com/${Date.now()}` },
     )
 
     expect(updatedWebhook).toBeInstanceOf(Webhook)
@@ -143,7 +143,7 @@ describe('Webhook test', () => {
     const oldWebhookUrl = webhook.getUrl()
     const updatedWebhook = await heidelpay.updateWebhook(
       webhookId,
-      { url: `http://heidelpay.com/${Date.now()}` },
+      { url: `http://unzer.com/${Date.now()}` },
     )
 
     expect(updatedWebhook).toBeInstanceOf(Webhook)

@@ -9,7 +9,7 @@ applications written in server-side JavaScript.
 
 # **Documentation**
 
-See the [Node API docs](https://docs.heidelpay.com/v1.0/docs/nodejs-sdk).
+See the [Node API docs](https://docs.unzer.com/docs/nodejs-sdk).
 
 # **Installation**
 
@@ -123,6 +123,41 @@ try {
   console.log('error', error);
 }
 ```
+
+## Supported payment types
+*   Card (credit card and debit card) + Recurring
+*   Giropay
+*   iDEAL
+*   Invoice (guaranteed)
+*   PayPal + Recurring
+*   Prepayment
+*   Przelewy24
+*   SEPA direct debit (guaranteed) + Recurring
+*   SOFORT
+*   EPS
+*   Unzer Bank Transfer
+*   Alipay
+*   WeChat Pay
+*   Invoice Factoring
+*   Unzer Instalment
+
+## Supported features
+*   Webhooks and event handling
+*   Payment Page (embedded and hosted)
+*   Payout (Credit)
+*   Recurring Payment
+
+## Support
+For any issues or questions please get in touch with our support team.
+
+### Web page
+[https://docs.unzer.com/](https://docs.unzer.com/)
+
+### Email
+[support@unzer.com](mailto:support@unzer.com)
+
+### Phone
+[+49 6221 43101-00](tel:+49-6221 43101 00)
 
 # **License**
 Apache 2.0

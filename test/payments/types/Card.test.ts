@@ -75,7 +75,7 @@ describe('Payment Type Card Test', () => {
     const fetchedCard: Card = await heidelpay.fetchPaymentType(card.getId()) as Card
 
     expect(recurring).toBeInstanceOf(Recurring)
-    expect(recurring.getReturnUrl()).toBe('https://dev.heidelpay.com')
+    expect(recurring.getReturnUrl()).toBe('https://dev.unzer.com')
     expect(recurring.getRedirectUrl()).toBeDefined()
     expect(recurring.getProcessing).toBeDefined()
     expect(fetchedCard.getRecurring()).toBe(true)
@@ -88,7 +88,7 @@ describe('Payment Type Card Test', () => {
     const fetchedCard: Card = await heidelpay.fetchPaymentType(card.getId()) as Card
 
     expect(recurring).toBeInstanceOf(Recurring)
-    expect(recurring.getReturnUrl()).toBe('https://dev.heidelpay.com')
+    expect(recurring.getReturnUrl()).toBe('https://dev.unzer.com')
     expect(recurring.getRedirectUrl()).toBeDefined()
     expect(recurring.getResources().getCustomerId()).toBeDefined()
     expect(recurring.getResources().getMetadataId()).toBeDefined()

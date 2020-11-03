@@ -24,11 +24,11 @@ export const createFullCustomer = () => {
   }
 
   let customer: Customer = new Customer()
-    .setFirstName('Rene')
-    .setLastName('Felder')
+    .setFirstName('Max')
+    .setLastName('Mustermann')
     .setSalutation(Salutation.mr)
     .setBirthDate('1972-12-24')
-    .setEmail('Rene.Felder@heidelpay.com')
+    .setEmail('max.mustermann@unzer.com')
     .setPhone('+49 6221 64 71 101')
     .setMobile('+49 172 123 457')
     .setBillingAddress(billingAddress)
@@ -48,11 +48,11 @@ export const createCustomer = (heidelpay) => async (builder: boolean = false) =>
   }
 
   let customer: Customer = new Customer()
-    .setFirstName('Rene')
-    .setLastName('Felder')
+    .setFirstName('Max')
+    .setLastName('Mustermann')
     .setSalutation(Salutation.mr)
     .setBirthDate('1972-12-24')
-    .setEmail('Rene.Felder@heidelpay.com')
+    .setEmail('max.mustermann@unzer.com')
     .setPhone('+49 6221 64 71 101')
     .setMobile('+49 172 123 457')
     .setBillingAddress(billingAddress)
@@ -90,12 +90,12 @@ export const createFullCustomerWithComapanyInfoRegister = () => {
   }
 
   let customer: Customer = new Customer()
-    .setFirstName('Rene')
-    .setLastName('Felder')
+    .setFirstName('Max')
+    .setLastName('Mustermann')
     .setSalutation(Salutation.mr)
     .setBirthDate('1972-12-24')
-    .setCompany('Heidelpay')
-    .setEmail('Rene.Felder@heidelpay.com')
+    .setCompany('Unzer')
+    .setEmail('max.mustermann@unzer.com')
     .setPhone('+49 6221 64 71 101')
     .setMobile('+49 172 123 457')
     .setBillingAddress(billingAddress)
@@ -132,12 +132,12 @@ export const createFullCustomerWithComapanyInfoNotRegister = () => {
   }
 
   let customer: Customer = new Customer()
-    .setFirstName('Rene')
-    .setLastName('Felder')
+    .setFirstName('Max')
+    .setLastName('Mustermann')
     .setSalutation(Salutation.mr)
     .setBirthDate('1972-12-24')
-    .setCompany('Heidelpay')
-    .setEmail('Rene.Felder@heidelpay.com')
+    .setCompany('Unzer')
+    .setEmail('max.mustermann@unzer.com')
     .setPhone('+49 6221 64 71 101')
     .setMobile('+49 172 123 457')
     .setBillingAddress(billingAddress)

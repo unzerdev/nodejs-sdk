@@ -1,9 +1,9 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import Invoice from '../../../src/payments/types/Invoice'
 
 describe('Payment Type Invoice Test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
 
   const getInvoice = () => {
     return new Invoice()
@@ -11,25 +11,25 @@ describe('Payment Type Invoice Test', () => {
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createUnzerInstance()
   })
 
   it('Test Create Invoice payment type', async () => {
-    const invoice: Invoice = await heidelpay.createPaymentType(getInvoice()) as Invoice
+    const invoice: Invoice = await unzer.createPaymentType(getInvoice()) as Invoice
 
     expect(invoice.getId()).toBeDefined()
   })
 
   it('Test Fetch Invoice payment type', async () => {
-    const invoice: Invoice = await heidelpay.createPaymentType(getInvoice()) as Invoice
-    const fetchInvoice: Invoice = await heidelpay.fetchPaymentType(invoice.getId()) as Invoice
+    const invoice: Invoice = await unzer.createPaymentType(getInvoice()) as Invoice
+    const fetchInvoice: Invoice = await unzer.fetchPaymentType(invoice.getId()) as Invoice
 
     expect(fetchInvoice.getId()).toEqual(invoice.getId())
   })
 
   it('Test geoLocation', async () => {
-    const invoice: Invoice = await heidelpay.createPaymentType(getInvoice()) as Invoice
-    const fetchInvoice: Invoice = await heidelpay.fetchPaymentType(invoice.getId()) as Invoice
+    const invoice: Invoice = await unzer.createPaymentType(getInvoice()) as Invoice
+    const fetchInvoice: Invoice = await unzer.fetchPaymentType(invoice.getId()) as Invoice
 
     expect(invoice.getGeoLocation()).toBeDefined()
     expect(fetchInvoice.getGeoLocation()).toBeDefined()

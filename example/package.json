@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@heidelpay/nodejs-sdk": "^1.2.0"
+    "@unzer/nodejs-sdk": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",

@@ -11,7 +11,7 @@ export default (basketId: string, basket: Basket, paymentService: PaymentService
         .put(
           `${apiURL.URL_BASKET}/${basketId}`,
           basket.getRequestPayload(), 
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       const newBasket = new Basket()

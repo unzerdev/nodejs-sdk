@@ -43,7 +43,7 @@ export default (args: payoutObject, paymentService: PaymentService): Promise<Pay
         .post(
           apiURL.URL_PAYMENT_PAYOUT,
           payload,
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       if (response.errors) {
@@ -51,7 +51,7 @@ export default (args: payoutObject, paymentService: PaymentService): Promise<Pay
       }
 
       // New Authorize with Hedeipay instance
-      let payout = new Payout(paymentService.getHeidelpay())
+      let payout = new Payout(paymentService.getUnzer())
 
       // Set payout Id
       payout.setId(response.id)

@@ -24,7 +24,7 @@ export default (paymentId: string, args: shipmentObject, paymentService: Payment
           paymentId: paymentId,
         }),
         payload,
-        paymentService.getHeidelpay().getPrivateKey()
+        paymentService.getUnzer().getPrivateKey()
       )
 
       if (response.errors) {
@@ -32,7 +32,7 @@ export default (paymentId: string, args: shipmentObject, paymentService: Payment
       }
 
       // New Shipment with Hedeipay instance
-      let shipment = new Shipment(paymentService.getHeidelpay())
+      let shipment = new Shipment(paymentService.getUnzer())
 
       // Set shipment Id
       shipment.setId(response.id)

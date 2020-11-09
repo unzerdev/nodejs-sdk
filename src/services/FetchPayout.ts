@@ -9,7 +9,7 @@ export default (paymentId: string, payoutId: string, paymentService: PaymentServ
       // Call api end point to get response
       const response: any = await paymentService
         .getRequestAdapter()
-        .get(`${apiURL.URL_PAYMENT}/${paymentId}/payouts/${payoutId}`, paymentService.getHeidelpay().getPrivateKey())
+        .get(`${apiURL.URL_PAYMENT}/${paymentId}/payouts/${payoutId}`, paymentService.getUnzer().getPrivateKey())
 
       // Handle errors response
       if (response.errors) {
@@ -17,7 +17,7 @@ export default (paymentId: string, payoutId: string, paymentService: PaymentServ
       }
 
       // New payout with Hedeipay instance
-      let payout = new Payout(paymentService.getHeidelpay())
+      let payout = new Payout(paymentService.getUnzer())
 
       // Set payout Id
       payout.setId(response.id)

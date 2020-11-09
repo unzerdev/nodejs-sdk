@@ -12,7 +12,7 @@ export default (customer: Customer, paymentService: PaymentService): Promise<Cus
         .post(
           apiURL.URL_CUSTOMER,
           customer.getRequestPayload(),
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       // Mapper customer

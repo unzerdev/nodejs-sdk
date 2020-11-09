@@ -18,14 +18,14 @@ export default (webhookId: string, args: any, paymentService: PaymentService): P
         .put(
           `${apiURL.URL_WEBHOOK}/${webhookId}`,
           payload,
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       if (response.errors) {
         return reject(ResponseErrorsMapper(response))
       }
 
-      let webhook = new Webhook(paymentService.getHeidelpay())
+      let webhook = new Webhook(paymentService.getUnzer())
       webhook.setUrl(response.url)
       webhook.setEvent(response.event)
       webhook.setId(response.id)

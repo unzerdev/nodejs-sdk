@@ -1,5 +1,5 @@
 import { FetchAdapter } from '../adapters/FetchAdapter'
-import Heidelpay from '../Heidelpay'
+import Unzer from '../Unzer'
 import PaymentType from '../payments/types/PaymentType'
 import { Customer } from '../payments/Customer'
 import Metadata from '../payments/Metadata'
@@ -51,20 +51,20 @@ import DeleteWebhook from './DeleteWebhook'
 
 export default class PaymentService {
   private requestAdapter: FetchAdapter
-  private heidelpay: Heidelpay
+  private unzer: Unzer
 
-  constructor(heidelpay: Heidelpay, locale?: string, env?: string) {
-    this.heidelpay = heidelpay
+  constructor(unzer: Unzer, locale?: string, env?: string) {
+    this.unzer = unzer
     this.requestAdapter = new FetchAdapter(locale, env)
   }
 
   /**
-   * Get Heidelpay instance
+   * Get Unzer instance
    *
-   * @returns {Heidelpay}
+   * @returns {Unzer}
    */
-  public getHeidelpay(): Heidelpay {
-    return this.heidelpay
+  public getUnzer(): Unzer {
+    return this.unzer
   }
 
   /**

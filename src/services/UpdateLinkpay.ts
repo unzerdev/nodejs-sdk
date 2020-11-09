@@ -12,14 +12,14 @@ export default (linkpayIdOrAlias: string, linkpay: Linkpay, paymentService: Paym
         .put(
           `${apiURL.URL_LINKPAY}/${linkpayIdOrAlias}`,
           linkpay.getPayload(),
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       // Map returned values to new Linkpay instance
       const updatedLinkpay: Linkpay = ResponseLinkpayMapper(response, linkpay)
 
-      // Set Heidelpay instance
-      updatedLinkpay.setHeidelpay(paymentService.getHeidelpay())
+      // Set Unzer instance
+      updatedLinkpay.setUnzer(paymentService.getUnzer())
 
       // Reset payload obj to empty obj
       updatedLinkpay.resetPayload()

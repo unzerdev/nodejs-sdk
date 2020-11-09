@@ -10,7 +10,7 @@ export default (customerId: string, paymentService: PaymentService): Promise<boo
       .delete(
         `${apiURL.URL_CUSTOMER}/${customerId}`, 
         {}, // send empty body when call delete customer
-        paymentService.getHeidelpay().getPrivateKey()
+        paymentService.getUnzer().getPrivateKey()
       )
       // Resolve final result
       resolve(response)

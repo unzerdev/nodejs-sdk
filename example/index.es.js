@@ -1,10 +1,10 @@
-const Heidelpay = require('@heidelpay/nodejs-sdk').default
-const Card = require('@heidelpay/nodejs-sdk').Card
-const Customer = require('@heidelpay/nodejs-sdk').Customer
+const Unzer = require('@unzer/nodejs-sdk').default
+const Card = require('@unzer/nodejs-sdk').Card
+const Customer = require('@unzer/nodejs-sdk').Customer
 
 const excuteScript = function() {
-  const heidelpay = new Heidelpay('s-priv-2a10BF2Cq2YvAo6ALSGHc3X7F42oWAIp')
-  console.log('SDK_VERSION', heidelpay.getVersion())
+  const unzer = new Unzer('s-priv-2a10BF2Cq2YvAo6ALSGHc3X7F42oWAIp')
+  console.log('SDK_VERSION', unzer.getVersion())
 
   const card = new Card('4711100000000000', '01/2022')
   card.setCVC('123')
@@ -12,10 +12,10 @@ const excuteScript = function() {
 
   const customer = new Customer('Rene', 'Fred')
 
-  heidelpay.createCustomer(customer).then(function(newCustomer) {
+  unzer.createCustomer(customer).then(function(newCustomer) {
     console.log('newCustomer', newCustomer.getCustomerId())
 
-    return heidelpay.createPaymentType(card)
+    return unzer.createPaymentType(card)
   }).then(function(paymentCard) {    
     console.log('paymentCard', paymentCard.getId())
     console.log('paymentCard', paymentCard.get3ds())

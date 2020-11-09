@@ -1,2 +1,2 @@
-export const SDK_TYPE = 'HeidelpayNodeJS'
-export const SDK_VERSION = '1.3.1'
+export const SDK_TYPE = 'UnzerNodeJS'
+export const SDK_VERSION = '1.0.0'

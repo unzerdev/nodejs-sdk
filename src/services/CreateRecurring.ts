@@ -30,7 +30,7 @@ export default (typeId: string, args: recurringObject, paymentService: PaymentSe
             typeId,
           }),
           payload,
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       if (response.errors) {

@@ -1,4 +1,4 @@
-import Heidelpay from '../../src/Heidelpay'
+import Unzer from '../../src/Unzer'
 import Card from '../../src/payments/types/Card'
 import { authorizeObject, chargeAuthorizeObject } from '../../src/payments/business/Authorization'
 import PaymentType from '../../src/payments/types/PaymentType'
@@ -18,9 +18,9 @@ import { webhookObject } from '../../src/payments/business/Webhook'
 
 export const getTimeout = () => 60000
 
-export const createHeidelpayInstance = () => new Heidelpay('s-priv-2a104MLt3Mm0ZVJAf0URjJphuPfYVUdF', 'en')
+export const createUnzerInstance = () => new Unzer('s-priv-2a104MLt3Mm0ZVJAf0URjJphuPfYVUdF', 'en')
 
-export const createPaymentTypeCard = (heidelpay) => async (builder: boolean = false): Promise<Card> => {
+export const createPaymentTypeCard = (unzer) => async (builder: boolean = false): Promise<Card> => {
   let card: Card = new Card()
     .setNumber('4711100000000000')
     .setCVC('123')
@@ -31,11 +31,11 @@ export const createPaymentTypeCard = (heidelpay) => async (builder: boolean = fa
     return card
   }
 
-  card = await heidelpay.createPaymentType(card)
+  card = await unzer.createPaymentType(card)
   return card
 }
 
-export const createPaymentTypeCard3ds = (heidelpay) => async (builder: boolean = false): Promise<Card> => {
+export const createPaymentTypeCard3ds = (unzer) => async (builder: boolean = false): Promise<Card> => {
   let card: Card = new Card()
     .setNumber('4711100000000000')
     .setCVC('123')
@@ -46,13 +46,13 @@ export const createPaymentTypeCard3ds = (heidelpay) => async (builder: boolean =
     return card
   }
 
-  card = await heidelpay.createPaymentType(card)
+  card = await unzer.createPaymentType(card)
   return card
 }
 
 export const createEventWebhookPayload = () => {
   const webhookPayload: webhookObject = {
-    url: `https://www.heidelpay.com/${Date.now()}`,
+    url: `https://www.unzer.com/${Date.now()}`,
     event: 'all'
   }
 
@@ -61,7 +61,7 @@ export const createEventWebhookPayload = () => {
 
 export const createEventListWebhookPayload = (eventList: Array<string>) => {
   const webhookPayload: webhookObject = {
-    url: `https://www.heidelpay.com/${Date.now()}`,
+    url: `https://www.unzer.com/${Date.now()}`,
     eventList,
   }
 
@@ -466,7 +466,7 @@ export const createMinimumPaypage = () => {
 
   paypage.setAmount(100)
   .setCurrency('EUR')
-  .setReturnUrl('https://www.heidelpay.com')
+  .setReturnUrl('https://www.unzer.com')
   .setShopDescription('A cool shop in the neighborhood')
   .setAdditionalAttributes({
     effectiveInterestRate: 1
@@ -484,7 +484,7 @@ export const createMinimumPaypageWithResources = () => {
 
   paypage.setAmount(100)
   .setCurrency('EUR')
-  .setReturnUrl('https://www.heidelpay.com')
+  .setReturnUrl('https://www.unzer.com')
   .setResources(resources)
 
   return paypage
@@ -495,15 +495,15 @@ export const createFullPaypage = () => {
 
   paypage.setAmount(100)
   .setCurrency('EUR')
-  .setReturnUrl('https://www.heidelpay.com')
+  .setReturnUrl('https://www.unzer.com')
   .setLogoImage('http://www.the-alley.vn/images/page/info-img.png')
   .setFullPageImage('https://i.ytimg.com/vi/v1SabYdIlZI/maxresdefault.jpg')
   .setShopName('A cool shop in the neighborhood')
-  .setTermsAndConditionUrl('https://www.heidelpay.com/en/')
-  .setPrivacyPolicyUrl('https://www.heidelpay.com/en/')
-  .setImpressumUrl('https://www.heidelpay.com/en/')
-  .setHelpUrl('https://www.heidelpay.com/en/')
-  .setContactUrl('https://www.heidelpay.com/en/')
+  .setTermsAndConditionUrl('https://www.unzer.com/en/')
+  .setPrivacyPolicyUrl('https://www.unzer.com/en/')
+  .setImpressumUrl('https://www.unzer.com/en/')
+  .setHelpUrl('https://www.unzer.com/en/')
+  .setContactUrl('https://www.unzer.com/en/')
 
   return paypage
 } 
@@ -513,22 +513,22 @@ export const createFullPaypageWithExcludedTypes = () => {
 
   paypage.setAmount(100)
     .setCurrency('EUR')
-    .setReturnUrl('https://www.heidelpay.com')
+    .setReturnUrl('https://www.unzer.com')
     .setLogoImage('http://www.the-alley.vn/images/page/info-img.png')
     .setFullPageImage('https://i.ytimg.com/vi/v1SabYdIlZI/maxresdefault.jpg')
     .setShopName('A cool shop in the neighborhood')
-    .setTermsAndConditionUrl('https://www.heidelpay.com/en/')
-    .setPrivacyPolicyUrl('https://www.heidelpay.com/en/')
-    .setImpressumUrl('https://www.heidelpay.com/en/')
-    .setHelpUrl('https://www.heidelpay.com/en/')
-    .setContactUrl('https://www.heidelpay.com/en/')
+    .setTermsAndConditionUrl('https://www.unzer.com/en/')
+    .setPrivacyPolicyUrl('https://www.unzer.com/en/')
+    .setImpressumUrl('https://www.unzer.com/en/')
+    .setHelpUrl('https://www.unzer.com/en/')
+    .setContactUrl('https://www.unzer.com/en/')
     .setExcludeTypes(['paypal', 'invoice-factoring'])
 
   return paypage
 }
 
 export const getShipmentOrderAndInvoiceId = () => {
-  const shipment = new Shipment(createHeidelpayInstance())
+  const shipment = new Shipment(createUnzerInstance())
 
   const invoiceId = Math.floor(Date.now() / 1000).toString()
   const orderId = Math.floor(Date.now() / 1000).toString()
@@ -541,7 +541,7 @@ export const getShipmentOrderAndInvoiceId = () => {
 
 export const getRequiredRecurringData = () => {
   const recurringPayload: recurringObject = {
-    returnUrl: 'https://dev.heidelpay.com'
+    returnUrl: 'https://dev.unzer.com'
   }
   
   return recurringPayload
@@ -549,7 +549,7 @@ export const getRequiredRecurringData = () => {
 
 export const getCompleteRecurringData = () => {
   const recurringPayload: recurringObject = {
-    returnUrl: 'https://dev.heidelpay.com',
+    returnUrl: 'https://dev.unzer.com',
     customerId: 's-cst-cfb84f279366',
     metadataId: 's-mtd-h6kvv7x9nalw',
   }
@@ -586,16 +586,16 @@ export const createExtensiveLinkpay = () => {
       .setInvoiceIdRequired('false')
       .setIntention('Checkout')
       .setOrderIdRequired('false')
-      .setReturnUrl('https://www.heidelpay.com')
+      .setReturnUrl('https://www.unzer.com')
       .setLogoImage('http://www.the-alley.vn/images/page/info-img.png')
       .setFullPageImage('https://i.ytimg.com/vi/v1SabYdIlZI/maxresdefault.jpg')
       .setShopName('A cool shop in the neighborhood')
-      .setTermsAndConditionUrl('https://www.heidelpay.com/en/')
-      .setPrivacyPolicyUrl('https://www.heidelpay.com/en/')
+      .setTermsAndConditionUrl('https://www.unzer.com/en/')
+      .setPrivacyPolicyUrl('https://www.unzer.com/en/')
       .setShopDescription('Come and buy')
-      .setImprintUrl('https://www.heidelpay.com/en/')
-      .setHelpUrl('https://www.heidelpay.com/en/')
-      .setContactUrl('https://www.heidelpay.com/en/')
+      .setImprintUrl('https://www.unzer.com/en/')
+      .setHelpUrl('https://www.unzer.com/en/')
+      .setContactUrl('https://www.unzer.com/en/')
       .setShippingAddressRequired('true')
       .setBillingAddressRequired('true')
       .setTagline('Tagline123')

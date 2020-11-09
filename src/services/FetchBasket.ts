@@ -10,7 +10,7 @@ export default (basketId: string, paymentService: PaymentService): Promise<Baske
         .getRequestAdapter()
         .get(
           `${apiURL.URL_BASKET}/${basketId}`, 
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       const newBasket = new Basket()

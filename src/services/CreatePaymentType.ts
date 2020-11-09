@@ -12,7 +12,7 @@ export default (paymentType: AbstractPaymentType, paymentService: PaymentService
       .post(
         paymentType.getTypeUrl(),
         paymentType.getPayload(),
-        paymentService.getHeidelpay().getPrivateKey()
+        paymentService.getUnzer().getPrivateKey()
       )
 
       // Handle errors response    
@@ -20,8 +20,8 @@ export default (paymentType: AbstractPaymentType, paymentService: PaymentService
         return reject(ResponseErrorsMapper(response))
       }
 
-      // Set Heidelpay instance
-      paymentType.setHeidelpay(paymentService.getHeidelpay())
+      // Set Unzer instance
+      paymentType.setUnzer(paymentService.getUnzer())
 
       // Set Payment Id
       paymentType.setId(response.id)

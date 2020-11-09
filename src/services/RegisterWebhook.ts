@@ -22,14 +22,14 @@ export default (args: webhookObject, paymentService: PaymentService): Promise<We
         .post(
           apiURL.URL_WEBHOOK,
           payload,
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       if (response.errors) {
         return reject(ResponseErrorsMapper(response))
       }
 
-      let webhook = new Webhook(paymentService.getHeidelpay())
+      let webhook = new Webhook(paymentService.getUnzer())
 
       if (response.events) {
         webhook.setEventList(response.events)

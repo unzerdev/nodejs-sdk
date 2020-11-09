@@ -11,7 +11,7 @@ export default (metadata: Metadata, paymentService: PaymentService): Promise<Met
         .post(
           apiURL.URL_METADATA,
           metadata.getRequestPayload(),
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       // Mapper metadata value

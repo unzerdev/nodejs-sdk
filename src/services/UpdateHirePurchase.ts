@@ -34,7 +34,7 @@ export default (hirePurchaseId: string, args: updateHirePurchaseObject, paymentS
         .put(
           `${apiURL.URL_TYPE_HIRE_PURCHASE}/${hirePurchaseId}`,
           payload,
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       const hirePurchase = new HirePurchase()

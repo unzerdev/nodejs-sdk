@@ -11,7 +11,7 @@ export default (amount: string, currency: string, effectiveInterestRate: string,
         .getRequestAdapter()
         .get(
           `${apiURL.URL_TYPE_HIRE_PURCHASE_PLANS}/?amount=${amount}&currency=${currency}&effectiveInterest=${effectiveInterestRate}&orderDate=${orderDate}`, 
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
         
       // Handle errors response
@@ -22,7 +22,7 @@ export default (amount: string, currency: string, effectiveInterestRate: string,
       const hirepurchasePlansList: Array<HirePurchasePlan> = []
 
       response.entity.map((item:any) => {
-        // Create new instance heidelpay
+        // Create new instance Unzer
         const hirePurchasePlan = new HirePurchasePlan()  
 
         // Set values foreach property

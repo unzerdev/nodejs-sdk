@@ -21,7 +21,7 @@ export default (paypage: Paypage, type: string, paymentService: PaymentService):
         .post(
           type === 'authorize' ? apiURL.URL_PAYPAGE_AUTHORIZE : apiURL.URL_PAYPAGE_CHARGE,
           payload,
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       // Handle errors response    
@@ -29,8 +29,8 @@ export default (paypage: Paypage, type: string, paymentService: PaymentService):
         return reject(ResponseErrorsMapper(response))
       }
 
-      // Set Heidelpay instance
-      paypage.setHeidelpay(paymentService.getHeidelpay())
+      // Set Unzer instance
+      paypage.setUnzer(paymentService.getUnzer())
 
       // Set Payment Id
       paypage.setId(response.id)

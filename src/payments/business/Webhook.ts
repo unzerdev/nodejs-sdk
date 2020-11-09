@@ -1,5 +1,5 @@
 import AbstractPayment from './AbstractPayment'
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import Resources from './Resources'
 
 export default class Webhook extends AbstractPayment  {
@@ -8,8 +8,8 @@ export default class Webhook extends AbstractPayment  {
   private eventList: Array<any>
   private resources: Resources
 
-  constructor(heidelpay: Heidelpay) {
-    super(heidelpay)
+  constructor(unzer: Unzer) {
+    super(unzer)
     this.resources = new Resources()
   }
 

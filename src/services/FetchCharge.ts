@@ -7,10 +7,10 @@ export default (args: string, paymentService: PaymentService): Promise<Charge> =
       // Call api end point to get response
       const response: any = await paymentService
         .getRequestAdapter()
-        .get(args, paymentService.getHeidelpay().getPrivateKey(), true)
+        .get(args, paymentService.getUnzer().getPrivateKey(), true)
 
       // New Charge with Hedeipay instance
-      let charge = new Charge(paymentService.getHeidelpay())
+      let charge = new Charge(paymentService.getUnzer())
 
       // Set charge Id
       charge.setId(response.id)

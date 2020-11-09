@@ -19,7 +19,7 @@ import HirePurchasePlan from './payments/types/HirePurchasePlan'
 import HirePurchase, { updateHirePurchaseObject } from './payments/types/HirePurchase'
 import Webhook, { webhookObject } from './payments/business/Webhook'
 
-export default class Heidelpay {
+export default class Unzer {
   private paymentService: PaymentService
   private privateKey: string
 
@@ -232,7 +232,7 @@ export default class Heidelpay {
   }
 
   /**
-   * Heidelpay Authorize
+   * Unzer Authorize
    *
    * @param {authorizeObject} args
    * @returns {Authorization}
@@ -258,7 +258,7 @@ export default class Heidelpay {
   }
 
   /**
-   * Heidelpay Charge
+   * Unzer Charge
    *
    * @param {chargeObject} args
    * @returns {Promise<Charge>}
@@ -284,7 +284,7 @@ export default class Heidelpay {
   }
 
   /**
-   * Heidelpay Charge after authorization
+   * Unzer Charge after authorization
    *
    * @param {chargeAuthorizeObject} args
    * @returns {Promise<Charge>}
@@ -394,7 +394,7 @@ export default class Heidelpay {
   }
 
   /**
-   * Heidelpay Payout
+   * Unzer Payout
    *
    * @param {payoutObject} args
    * @returns {Payout}

@@ -1,25 +1,25 @@
 import Card from '../../../src/payments/types/Card'
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import Authorization  from '../../../src/payments/business/Authorization'
 import Charge from '../../../src/payments/business/Charge'
 import * as TestHelper from '../../helpers/TestHelper'
 
 describe('Payment Type Card Test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   let createPaymentTypeCard3ds
   const {getAuthorization, getChargeWithCard3ds} = TestHelper
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
-    createPaymentTypeCard3ds = TestHelper.createPaymentTypeCard3ds(heidelpay)
+    unzer = TestHelper.createUnzerInstance()
+    createPaymentTypeCard3ds = TestHelper.createPaymentTypeCard3ds(unzer)
   })
 
   it('Test Create card with merchant NOT PCI DSS Compliant', async () => {
     let card: Card = new Card('4711100000000000', '01/2022')
     card.setCVC('123')
     card.set3ds(true)
-    card = await heidelpay.createPaymentType(card) as Card
+    card = await unzer.createPaymentType(card) as Card
     
     expect(card.getId()).toBeDefined()
     expect(card.get3ds()).toBeTruthy()
@@ -52,7 +52,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test Fetch card type', async () => {
     const card: Card = await createPaymentTypeCard3ds()
-    const fetchedCard: Card = await heidelpay.fetchPaymentType(card.getId()) as Card
+    const fetchedCard: Card = await unzer.fetchPaymentType(card.getId()) as Card
 
     expect(card.getId()).toEqual(fetchedCard.getId())
     expect(card.getNumber()).toBeDefined()
@@ -62,7 +62,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test geoLocation', async () => {
     const card: Card = await createPaymentTypeCard3ds()
-    const fetchedCard: Card = await heidelpay.fetchPaymentType(card.getId()) as Card
+    const fetchedCard: Card = await unzer.fetchPaymentType(card.getId()) as Card
 
     expect(card.getGeoLocation()).toBeDefined()
     expect(fetchedCard.getGeoLocation()).toBeDefined()

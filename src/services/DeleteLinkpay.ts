@@ -10,7 +10,7 @@ export default (linkpayIdOrAlias: string, paymentService: PaymentService): Promi
         .delete(
           `${apiURL.URL_LINKPAY}/${linkpayIdOrAlias}`,
           {}, // send empty body when call delete method
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
         
       // Resolve final result

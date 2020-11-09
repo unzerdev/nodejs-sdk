@@ -9,8 +9,8 @@ export default (typeId: string, paymentService: PaymentService): Promise<Payment
       // Parse paymentTypeId string to typeId and create a PaymentType
       const paymentType: AbstractPaymentType = Utils.getPaymentTypeFromTypeId(typeId)
 
-      // Set Heidelpay instance
-      paymentType.setHeidelpay(paymentService.getHeidelpay())
+      // Set Unzer instance
+      paymentType.setUnzer(paymentService.getUnzer())
 
       // Parse URL with parameters
       const requestUrl = `${paymentType.getTypeUrl()}/${typeId}`
@@ -18,7 +18,7 @@ export default (typeId: string, paymentService: PaymentService): Promise<Payment
       // Call api end point to get response
       const response: any = await paymentService
         .getRequestAdapter()
-        .get(requestUrl, paymentService.getHeidelpay().getPrivateKey())
+        .get(requestUrl, paymentService.getUnzer().getPrivateKey())
 
       // Resolve final result
       resolve(Utils.mapResponsePaymentType(response))  

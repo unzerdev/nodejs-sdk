@@ -16,7 +16,7 @@ export default (paymentId: string, paymentService: PaymentService): Promise<Paym
       // Call api end point to get response
       const response: any = await paymentService
         .getRequestAdapter()
-        .get(`${apiURL.URL_PAYMENT}/${paymentId}`, paymentService.getHeidelpay().getPrivateKey())
+        .get(`${apiURL.URL_PAYMENT}/${paymentId}`, paymentService.getUnzer().getPrivateKey())
 
       // Handle errors response
       if (response.errors) {
@@ -24,7 +24,7 @@ export default (paymentId: string, paymentService: PaymentService): Promise<Paym
       }
 
       // New Payment with Hedeipay instance
-      let payment = new Payment(paymentService.getHeidelpay())
+      let payment = new Payment(paymentService.getUnzer())
 
       // Set payment Id
       payment.setId(response.id)
@@ -57,12 +57,12 @@ const _fetchAuthorization = (
   transactions: any,
   paymentService: PaymentService
 ): Promise<Authorization> => {
-  return new Promise(async resolve => {
+  return new Promise(async (resolve, reject) => {
     // Find transaction authorize in list of transactions
     const authorizeItem = transactions.find((item: any) => item.type === 'authorize')
 
     if (typeof authorizeItem === 'undefined') {
-      resolve() // No authorize Item found
+      reject() // No authorize Item found
     } else {
       // Call Authorization service to fetch transaction
       const authorization: Authorization = await FetchAuthorization(

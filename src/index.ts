@@ -1,4 +1,4 @@
-import Heidelpay from './Heidelpay'
+import Unzer from './Unzer'
 import { Customer, Address, Salutation } from './payments/Customer'
 import Metadata from './payments/Metadata'
 import Resources from './payments/business/Resources'
@@ -11,21 +11,19 @@ import EPS from './payments/types/Eps'
 import Giropay from './payments/types/Giropay'
 import Ideal from './payments/types/Ideal'
 import Invoice from './payments/types/Invoice'
-import InvoiceGuaranteed from './payments/types/InvoiceGuaranteed'
-import InvoiceFactoring from './payments/types/InvoiceFactoring'
+import InvoiceSecured from './payments/types/InvoiceSecured'
 import Prepayment from './payments/types/Prepayment'
 import Przelewy24 from './payments/types/Przelewy24'
 import SepaDirectDebit from './payments/types/SepaDirectDebit'
-import SepaDirectDebitGuaranteed from './payments/types/SepaDirectDebitGuaranteed'
+import SepaDirectDebitSecured from './payments/types/SepaDirectDebitSecured'
 import Sofort from './payments/types/Sofort'
 import PIS from './payments/types/Pis'
 import Paypal from './payments/types/Paypal'
 import Alipay from './payments/types/Alipay'
 import WechatPay from './payments/types/WechatPay'
-import HirePurchase from './payments/types/HirePurchase'
 import InstallmentSecured from './payments/types/InstallmentSecured'
 
-export default Heidelpay
+export default Unzer
 export {
   Customer,
   Metadata,
@@ -40,18 +38,16 @@ export {
   Giropay,
   Ideal,
   Invoice,
-  InvoiceGuaranteed,
-  InvoiceFactoring,
+  InvoiceSecured,
   Prepayment,
   Przelewy24,
   SepaDirectDebit,
-  SepaDirectDebitGuaranteed,
+  SepaDirectDebitSecured,
   Sofort,
   PIS,
   Paypal,
   Alipay,
   WechatPay,
-  HirePurchase,
   InstallmentSecured,
   Bancontact,
 }

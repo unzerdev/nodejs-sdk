@@ -1,4 +1,4 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import Authorization from '../../../src/payments/business/Authorization'
 import Card from '../../../src/payments/types/Card'
 import { Customer } from '../../../src/payments/Customer'
@@ -7,20 +7,20 @@ import * as CustomerTestHelper from '../../helpers/CustomerTestHelper'
 import Payment from '../../../src/payments/business/Payment'
 
 describe('Authorize test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   let createPaymentTypeCard, createCustomer
   const { getAuthorization, getAuthorizationWithOrderId } = TestHelper
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
-    createPaymentTypeCard = TestHelper.createPaymentTypeCard(heidelpay)
-    createCustomer = CustomerTestHelper.createCustomer(heidelpay)
+    unzer = TestHelper.createUnzerInstance()
+    createPaymentTypeCard = TestHelper.createPaymentTypeCard(unzer)
+    createCustomer = CustomerTestHelper.createCustomer(unzer)
   })
 
   it('Test authorize with authorize payload object', async () => {
     const card = await createPaymentTypeCard()
-    const authorize: Authorization = await heidelpay.authorize(getAuthorization(card.getId()))
+    const authorize: Authorization = await unzer.authorize(getAuthorization(card.getId()))
 
     expect(authorize).toBeInstanceOf(Authorization)
     expect(authorize.getId()).toBeDefined()
@@ -37,8 +37,8 @@ describe('Authorize test', () => {
   it('Test authorize with payment type Card and Order Id', async () => {
     const card = await createPaymentTypeCard(true)
     const authorizeObject = getAuthorizationWithOrderId(card)
-    const authorize: Authorization = await heidelpay.authorize(authorizeObject)
-    const payment: Payment = await heidelpay.fetchPayment(authorize.getResources().getPaymentId()) as Payment
+    const authorize: Authorization = await unzer.authorize(authorizeObject)
+    const payment: Payment = await unzer.fetchPayment(authorize.getResources().getPaymentId()) as Payment
 
     expect(authorize.getOrderId()).toEqual(authorizeObject.orderId)
     expect(payment.getResources()).toBeDefined()
@@ -51,8 +51,8 @@ describe('Authorize test', () => {
   it('Test authorize with payment type Card', async () => {
     const card = await createPaymentTypeCard(true)
 
-    const authorize: Authorization = await heidelpay.authorize(getAuthorization(card))
-    const payment: Payment = await heidelpay.fetchPayment(authorize.getResources().getPaymentId()) as Payment
+    const authorize: Authorization = await unzer.authorize(getAuthorization(card))
+    const payment: Payment = await unzer.fetchPayment(authorize.getResources().getPaymentId()) as Payment
 
     expect(payment.getResources()).toBeDefined()
     expect(authorize).toBeInstanceOf(Authorization)
@@ -65,7 +65,7 @@ describe('Authorize test', () => {
     const customer = await createCustomer(true) as Customer
     const card = await createPaymentTypeCard() as Card
 
-    const authorize: Authorization = await heidelpay.authorize(getAuthorization(card.getId(), customer))
+    const authorize: Authorization = await unzer.authorize(getAuthorization(card.getId(), customer))
     expect(authorize.getId()).toBeDefined()
     expect(authorize.getPayload()).toBeDefined()
   })
@@ -74,7 +74,7 @@ describe('Authorize test', () => {
     const customer = await createCustomer() as Customer
     const card = await createPaymentTypeCard() as Card
 
-    const authorize: Authorization = await heidelpay.authorize(getAuthorization(card.getId(), customer.getCustomerId()))
+    const authorize: Authorization = await unzer.authorize(getAuthorization(card.getId(), customer.getCustomerId()))
     expect(authorize.getId()).toBeDefined()
     expect(authorize.getPayload()).toBeDefined()
   })
@@ -82,7 +82,7 @@ describe('Authorize test', () => {
   it('Test returned traceId', async () => {
     const card = await createPaymentTypeCard(true)
     const authorizeObject = getAuthorizationWithOrderId(card)
-    const authorize: Authorization = await heidelpay.authorize(authorizeObject)
+    const authorize: Authorization = await unzer.authorize(authorizeObject)
 
     expect(authorize.getResources().getTraceId()).toBeDefined()
   })

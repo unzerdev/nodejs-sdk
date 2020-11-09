@@ -1,18 +1,18 @@
-import Heidelpay from '../../src/Heidelpay'
+import Unzer from '../../src/Unzer'
 import * as TestHelper from '../helpers/TestHelper'
 
 describe('Payment Type Card Test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   const { getAuthorization, getCancelAuthorization, getCancelCharge, getCharge } = TestHelper
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createUnzerInstance()
   })
 
   it('Test fetch authorization error', async () => {
     try {
-      await heidelpay.fetchAuthorization('s-pay-578901239')
+      await unzer.fetchAuthorization('s-pay-578901239')
     } catch (error) {
       expect(error.message).toBeDefined()
 
@@ -24,7 +24,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test fetch charge error with wrong payment Id', async () => {
     try {
-      await heidelpay.fetchCharge('s-pay-578901239', 's-chg-1314142')
+      await unzer.fetchCharge('s-pay-578901239', 's-chg-1314142')
     } catch (error) {
       expect(error.message).toBeDefined()
 
@@ -36,7 +36,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test fetch charge error with payment Id', async () => {
     try {
-      await heidelpay.fetchCharge('s-pay-57', 's-chg-1314142')
+      await unzer.fetchCharge('s-pay-57', 's-chg-1314142')
     } catch (error) {
       expect(error.message).toEqual("Charge Id is not found in list of transaction")
     }
@@ -44,7 +44,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test fetch cancel charge error with payment Id', async () => {
     try {
-      const charge = await heidelpay.fetchCharge('s-pay-57', 's-chg-1')
+      const charge = await unzer.fetchCharge('s-pay-57', 's-chg-1')
       charge.getCancel('s-cn-1234')
     } catch (error) {
       expect(error.message).toEqual("Cancel Id is not found in list of transaction")
@@ -53,7 +53,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test fetch cancel error with wrong payment Id', async () => {
     try {
-      await heidelpay.fetchCancel('s-pay-578901239', 's-cnl-1314142')
+      await unzer.fetchCancel('s-pay-578901239', 's-cnl-1314142')
     } catch (error) {
       expect(error.message).toBeDefined()
 
@@ -65,7 +65,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test fetch cancel error with wrong cancel Id', async () => {
     try {
-      await heidelpay.fetchCancel('s-pay-57', 's-cnl-1')
+      await unzer.fetchCancel('s-pay-57', 's-cnl-1')
     } catch (error) {
       expect(error.message).toBeDefined()
       expect(error.message).toEqual("Cancel Id is not found in list of transaction")
@@ -74,7 +74,7 @@ describe('Payment Type Card Test', () => {
 
   it('Test fetch cancel error with wrong cancel Id and refund Id', async () => {
     try {
-      await heidelpay.fetchCancel('s-pay-57', 's-cnl-1', 's-chg-1')
+      await unzer.fetchCancel('s-pay-57', 's-cnl-1', 's-chg-1')
     } catch (error) {
       expect(error.message).toBeDefined()
       expect(error.message).toEqual("Cancel Id is not found in list of transaction")

@@ -13,7 +13,7 @@ export default (linkpay: Linkpay, type: string, paymentService: PaymentService):
         .post(
           type === 'authorize' ? apiURL.URL_LINKPAY_AUTHORIZE : apiURL.URL_LINKPAY_CHARGE,
           linkpay.getPayload(),
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       // Handle errors response    
@@ -24,8 +24,8 @@ export default (linkpay: Linkpay, type: string, paymentService: PaymentService):
       // Map returned values to new Linkpay instance
       const newLinkpay: Linkpay = ResponseLinkpayMapper(response, linkpay)
 
-      // Set Heidelpay instance
-      newLinkpay.setHeidelpay(paymentService.getHeidelpay())
+      // Set Unzer instance
+      newLinkpay.setUnzer(paymentService.getUnzer())
 
       // Reset payload obj to empty obj
       newLinkpay.resetPayload()

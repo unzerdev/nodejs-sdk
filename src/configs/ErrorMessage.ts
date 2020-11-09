@@ -1,1 +1,1 @@
-export const ERROR_MISSING_PRIVATE_KEY = 'Missing key to init Heidelpay SDK'
+export const ERROR_MISSING_PRIVATE_KEY = 'Missing key to init Unzer SDK'

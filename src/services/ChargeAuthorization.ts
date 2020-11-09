@@ -29,7 +29,7 @@ export default (args: chargeAuthorizeObject, paymentService: PaymentService): Pr
           paymentId,
         }),
         payload,
-        paymentService.getHeidelpay().getPrivateKey()
+        paymentService.getUnzer().getPrivateKey()
       )
 
       // Handle errors response
@@ -38,7 +38,7 @@ export default (args: chargeAuthorizeObject, paymentService: PaymentService): Pr
       }
 
       // New Charge with Hedeipay instance
-      let charge = new Charge(paymentService.getHeidelpay())
+      let charge = new Charge(paymentService.getUnzer())
 
       // Set charge Id
       charge.setId(response.id)

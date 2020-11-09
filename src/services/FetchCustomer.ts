@@ -11,7 +11,7 @@ export default (customerId: string, paymentService: PaymentService): Promise<Cus
         .getRequestAdapter()
         .get(
           `${apiURL.URL_CUSTOMER}/${customerId}`, 
-          paymentService.getHeidelpay().
+          paymentService.getUnzer().
           getPrivateKey()
         )
 

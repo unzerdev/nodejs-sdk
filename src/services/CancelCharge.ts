@@ -43,7 +43,7 @@ export default (args: cancelChargeObject, paymentService: PaymentService): Promi
           chargeId,
         }),
         payload,
-        paymentService.getHeidelpay().getPrivateKey()
+        paymentService.getUnzer().getPrivateKey()
       )
 
       // Handle errors response        
@@ -52,7 +52,7 @@ export default (args: cancelChargeObject, paymentService: PaymentService): Promi
       }
 
       // New Cancel with Hedeipay instance
-      let cancel = new Cancel(paymentService.getHeidelpay())
+      let cancel = new Cancel(paymentService.getUnzer())
 
       // Set cancel Id
       cancel.setId(response.id)

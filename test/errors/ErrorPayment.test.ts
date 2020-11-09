@@ -1,4 +1,4 @@
-import Heidelpay from '../../src/Heidelpay'
+import Unzer from '../../src/Unzer'
 import * as ErrorMessage from '../../src/configs/ErrorMessage'
 import * as TestHelper from '../helpers/TestHelper'
 import Card from '../../src/payments/types/Card'
@@ -7,7 +7,7 @@ import Cancel from '../../src/payments/business/Cancel'
 import Prepayment from '../../src/payments/types/Prepayment'
 
 describe('Payment Type Card Test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   let createPaymentTypeCard
   const { getAuthorization, getCancelAuthorization, getCancelCharge, getCharge } = TestHelper
 
@@ -17,13 +17,13 @@ describe('Payment Type Card Test', () => {
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
-    createPaymentTypeCard = TestHelper.createPaymentTypeCard(heidelpay)
+    unzer = TestHelper.createUnzerInstance()
+    createPaymentTypeCard = TestHelper.createPaymentTypeCard(unzer)
   })
 
   it('Test Authorize with Prepayment payment type', async () => {
     try {
-      const prepayment: Prepayment = await heidelpay.createPaymentType(getPrepayment()) as Prepayment
+      const prepayment: Prepayment = await unzer.createPaymentType(getPrepayment()) as Prepayment
       await prepayment.authorize(TestHelper.getAuthorization(prepayment.getId()))  
     } catch (error) {
       expect(error.message).toBeDefined()
@@ -37,7 +37,7 @@ describe('Payment Type Card Test', () => {
   it('Test cancel authorization error', async () => {
     try {
       const card: Card = await createPaymentTypeCard()
-      const authorization: Authorization = await heidelpay.authorize(getAuthorization(card.getId()))
+      const authorization: Authorization = await unzer.authorize(getAuthorization(card.getId()))
 
       await authorization.cancel(500)
     } catch (error) {

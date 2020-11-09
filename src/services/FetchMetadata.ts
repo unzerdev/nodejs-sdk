@@ -10,7 +10,7 @@ export default (metadataId: string, paymentService: PaymentService): Promise<Met
         .getRequestAdapter()
         .get(
           `${apiURL.URL_METADATA}/${metadataId}`, 
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       // Mapper metadata value

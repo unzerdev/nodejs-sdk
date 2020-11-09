@@ -8,7 +8,7 @@ export default (args: string, paymentService: PaymentService): Promise<Cancel> =
       // Call api end point to get response
       const response: any = await paymentService
         .getRequestAdapter()
-        .get(args, paymentService.getHeidelpay().getPrivateKey(), true)
+        .get(args, paymentService.getUnzer().getPrivateKey(), true)
 
       // Handle errors response
       if (response.errors) {
@@ -16,7 +16,7 @@ export default (args: string, paymentService: PaymentService): Promise<Cancel> =
       }
 
       // New Cancel with Hedeipay instance
-      let cancel = new Cancel(paymentService.getHeidelpay())
+      let cancel = new Cancel(paymentService.getUnzer())
 
       // Set cancel Id
       cancel.setId(response.id)

@@ -54,7 +54,7 @@ export default (args: chargeObject, paymentService: PaymentService): Promise<Cha
       // Call api end point to get response
       const response: any = await paymentService
         .getRequestAdapter()
-        .post(apiURL.URL_PAYMENT_CHARGE, payload, paymentService.getHeidelpay().getPrivateKey())
+        .post(apiURL.URL_PAYMENT_CHARGE, payload, paymentService.getUnzer().getPrivateKey())
 
       // Handle errors response        
       if (response.errors) {
@@ -62,7 +62,7 @@ export default (args: chargeObject, paymentService: PaymentService): Promise<Cha
       }
 
       // New Charge with Hedeipay instance
-      let charge = new Charge(paymentService.getHeidelpay())
+      let charge = new Charge(paymentService.getUnzer())
 
       // Set chargeId
       charge.setId(response.id)

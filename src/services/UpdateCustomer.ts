@@ -12,7 +12,7 @@ export default (customerId: string, customer: Customer, paymentService: PaymentS
         .put(
           `${apiURL.URL_CUSTOMER}/${customerId}`,
           customer.getRequestPayload(),
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       // Mapper customer

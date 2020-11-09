@@ -5,12 +5,9 @@ import Giropay from '../payments/types/Giropay'
 import Paypal from '../payments/types/Paypal'
 import Ideal from '../payments/types/Ideal'
 import Invoice from '../payments/types/Invoice'
-import InvoiceGuaranteed from '../payments/types/InvoiceGuaranteed'
-import InvoiceFactoring from '../payments/types/InvoiceFactoring'
 import Prepayment from '../payments/types/Prepayment'
 import Przelewy24 from '../payments/types/Przelewy24'
 import SepaDirectDebit from '../payments/types/SepaDirectDebit'
-import SepaDirectDebitGuaranteed from '../payments/types/SepaDirectDebitGuaranteed'
 import SepaDirectDebitSecured from '../payments/types/SepaDirectDebitSecured'
 import Sofort from '../payments/types/Sofort'
 import PIS from '../payments/types/Pis'
@@ -81,20 +78,14 @@ export const getPaymentTypeFromTypeId = (typeId: string): AbstractPaymentType =>
       return new Ideal()
     case 'ivc':
       return new Invoice()
-    case 'ivg':
-      return new InvoiceGuaranteed()
     case 'ivs':
       return new InvoiceSecured()
-    case 'ivf':
-      return new InvoiceFactoring()
     case 'ppy':
       return new Prepayment()
     case 'p24':
       return new Przelewy24()
     case 'sdd':
       return new SepaDirectDebit("")
-    case 'ddg':
-      return new SepaDirectDebitGuaranteed("")
     case 'dds':
       return new SepaDirectDebitSecured("")
     case 'sft':
@@ -177,26 +168,12 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
       invoice.setGeoLocation(response.geoLocation)
       return invoice
 
-    case 'invoice-guaranteed':
-      const invoiceGuaranteed: InvoiceGuaranteed = new InvoiceGuaranteed()
-
-      invoiceGuaranteed.setId(response.id)
-      invoiceGuaranteed.setGeoLocation(response.geoLocation)
-      return invoiceGuaranteed
-
     case 'invoice-secured':
       const invoiceSecured: InvoiceSecured = new InvoiceSecured()
 
       invoiceSecured.setId(response.id)
       invoiceSecured.setGeoLocation(response.geoLocation)
       return invoiceSecured
-
-    case 'invoice-factoring':
-      const invoiceFactoring: InvoiceFactoring = new InvoiceFactoring()
-
-      invoiceFactoring.setId(response.id)
-      invoiceFactoring.setGeoLocation(response.geoLocation)
-      return invoiceFactoring
 
     case 'przelewy24':
       const przelewy24: Przelewy24 = new Przelewy24()
@@ -220,15 +197,6 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
       sepaDirectDebit.setId(response.id)
       sepaDirectDebit.setGeoLocation(response.geoLocation)
       return sepaDirectDebit
-
-    case 'sepa-direct-debit-guaranteed':
-      const ddg: SepaDirectDebitGuaranteed = new SepaDirectDebitGuaranteed(response.iban)
-        .setBic(response.bic)
-        .setHolder(response.holder)
-
-      ddg.setId(response.id)
-      ddg.setGeoLocation(response.geoLocation)
-      return ddg
 
     case 'sepa-direct-debit-secured':
       const dds: SepaDirectDebitSecured = new SepaDirectDebitSecured(response.iban)

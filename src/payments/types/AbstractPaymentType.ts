@@ -1,31 +1,31 @@
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import Authorization, { authorizeObject } from '../business/Authorization'
 import Charge, { chargeObject } from '../business/Charge'
 
 export default abstract class AbstractPaymentType {
   private _id: string
-  private _heidelpay: Heidelpay
+  private _unzer: Unzer
   private _geoLocation: any
 
   public abstract getTypeUrl(): string
   public abstract getPayload(): any
 
   /**
-   * Set Heidelpay instance
+   * Set Unzer instance
    *
-   * @param {Heidelpay} heidelpay
+   * @param {Unzer} unzer
    */
-  public setHeidelpay(heidelpay: Heidelpay) {
-    this._heidelpay = heidelpay
+  public setUnzer(unzer: Unzer) {
+    this._unzer = unzer
   }
 
   /**
-   * Get instance Heidelpay
+   * Get instance Unzer
    *
-   * @returns {Heidelpay}
+   * @returns {Unzer}
    */
-  public getHeidelpay(): Heidelpay {
-    return this._heidelpay
+  public getUnzer(): Unzer {
+    return this._unzer
   }
 
   /**
@@ -53,7 +53,7 @@ export default abstract class AbstractPaymentType {
    * @returns {Promise<Authorization>}
    */
   public authorize(args: authorizeObject): Promise<Authorization> {
-    return this.getHeidelpay().authorize(args)
+    return this.getUnzer().authorize(args)
   }
 
   /**
@@ -63,7 +63,7 @@ export default abstract class AbstractPaymentType {
    * @returns {Promise<Charge>}
    */
   public charge(args: chargeObject): Promise<Charge> {
-    return this.getHeidelpay().charge(args)
+    return this.getUnzer().charge(args)
   }
 
   /**

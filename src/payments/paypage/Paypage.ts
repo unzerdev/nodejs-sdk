@@ -1,4 +1,4 @@
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import AbstractPaymentType from '../types/AbstractPaymentType'
 import PaymentType from '../types/PaymentType'
 import Resources from '../business/Resources'

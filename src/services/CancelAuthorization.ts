@@ -28,7 +28,7 @@ export default (args: cancelAuthorizeObject, paymentService: PaymentService): Pr
           authorizationId,
         }),
         payload,
-        paymentService.getHeidelpay().getPrivateKey()
+        paymentService.getUnzer().getPrivateKey()
       )
 
       // Handle errors response        
@@ -37,7 +37,7 @@ export default (args: cancelAuthorizeObject, paymentService: PaymentService): Pr
       }
 
       // New Cancel with Hedeipay instance
-      let cancel = new Cancel(paymentService.getHeidelpay())
+      let cancel = new Cancel(paymentService.getUnzer())
 
       // Set cancel Id
       cancel.setId(response.id)

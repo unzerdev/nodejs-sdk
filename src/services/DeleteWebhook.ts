@@ -12,7 +12,7 @@ export default (paymentService: PaymentService, webhookId?: string): Promise<Web
         .delete(
           endpoint,
           {},
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
         )
 
       if (response.errors) {

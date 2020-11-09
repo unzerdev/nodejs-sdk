@@ -7,10 +7,10 @@ export default (args: string, paymentService: PaymentService): Promise<Authoriza
       // Call api end point to get response
       const response: any = await paymentService
         .getRequestAdapter()
-        .get(args, paymentService.getHeidelpay().getPrivateKey(), true)
+        .get(args, paymentService.getUnzer().getPrivateKey(), true)
 
       // New authorization with Hedeipay instance
-      let authorization = new Authorization(paymentService.getHeidelpay())
+      let authorization = new Authorization(paymentService.getUnzer())
 
       // Set authorization Id
       authorization.setId(response.id)

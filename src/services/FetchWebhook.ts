@@ -11,14 +11,14 @@ export default (paymentService: PaymentService, webhookId?: string): Promise<Web
         .getRequestAdapter()
         .get(
           endpoint,
-          paymentService.getHeidelpay().getPrivateKey()
+          paymentService.getUnzer().getPrivateKey()
           )
       
       if (response.errors) {
         return reject(ResponseErrorsMapper(response))
       }
 
-      let webhook = new Webhook(paymentService.getHeidelpay())
+      let webhook = new Webhook(paymentService.getUnzer())
 
       if (response.events) {
         webhook.setEventList(response.events)

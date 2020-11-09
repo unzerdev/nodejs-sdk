@@ -20,7 +20,7 @@ export default (paymentType: AbstractPaymentType, paymentService: PaymentService
         return reject(ResponseErrorsMapper(response))
       }
 
-      // Set Heidelpay instance
+      // Set Unzer instance
       paymentType.setHeidelpay(paymentService.getHeidelpay())
 
       // Set Payment Id

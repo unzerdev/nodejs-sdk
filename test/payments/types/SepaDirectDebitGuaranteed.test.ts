@@ -1,10 +1,10 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import * as CustomerTestHelper from '../../helpers/CustomerTestHelper'
 import SepaDirectDebitGuaranteed from '../../../src/payments/types/SepaDirectDebitGuaranteed'
 
 describe('Payment Type SepaDirectDebitGuaranteed Test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   const { createFullCustomer } = CustomerTestHelper
   const { getCharge } = TestHelper
 
@@ -23,25 +23,25 @@ describe('Payment Type SepaDirectDebitGuaranteed Test', () => {
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createHeidelpayInstance()
   })
 
   it('Test Create SepaDirectDebitGuaranteed payment type', async () => {
-    const ssd: SepaDirectDebitGuaranteed = await heidelpay.createPaymentType(getSSDConstructor()) as SepaDirectDebitGuaranteed
+    const ssd: SepaDirectDebitGuaranteed = await unzer.createPaymentType(getSSDConstructor()) as SepaDirectDebitGuaranteed
 
     expect(ssd.getId()).toBeDefined()
   })
 
   it('Test Fetch SepaDirectDebitGuaranteed payment type', async () => {
-    const ssd: SepaDirectDebitGuaranteed = await heidelpay.createPaymentType(getSSD()) as SepaDirectDebitGuaranteed
-    const fetchSepaDirectDebitGuaranteed: SepaDirectDebitGuaranteed = await heidelpay.fetchPaymentType(ssd.getId()) as SepaDirectDebitGuaranteed
+    const ssd: SepaDirectDebitGuaranteed = await unzer.createPaymentType(getSSD()) as SepaDirectDebitGuaranteed
+    const fetchSepaDirectDebitGuaranteed: SepaDirectDebitGuaranteed = await unzer.fetchPaymentType(ssd.getId()) as SepaDirectDebitGuaranteed
 
     expect(fetchSepaDirectDebitGuaranteed.getId()).toEqual(ssd.getId())
   })
 
   it('Test geoLocation', async () => {
-    const ssd: SepaDirectDebitGuaranteed = await heidelpay.createPaymentType(getSSD()) as SepaDirectDebitGuaranteed
-    const fetchSepaDirectDebitGuaranteed: SepaDirectDebitGuaranteed = await heidelpay.fetchPaymentType(ssd.getId()) as SepaDirectDebitGuaranteed
+    const ssd: SepaDirectDebitGuaranteed = await unzer.createPaymentType(getSSD()) as SepaDirectDebitGuaranteed
+    const fetchSepaDirectDebitGuaranteed: SepaDirectDebitGuaranteed = await unzer.fetchPaymentType(ssd.getId()) as SepaDirectDebitGuaranteed
 
     expect(ssd.getGeoLocation()).toBeDefined()
     expect(fetchSepaDirectDebitGuaranteed.getGeoLocation()).toBeDefined()

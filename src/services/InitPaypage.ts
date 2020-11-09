@@ -29,7 +29,7 @@ export default (paypage: Paypage, type: string, paymentService: PaymentService):
         return reject(ResponseErrorsMapper(response))
       }
 
-      // Set Heidelpay instance
+      // Set Unzer instance
       paypage.setHeidelpay(paymentService.getHeidelpay())
 
       // Set Payment Id

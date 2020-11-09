@@ -1,5 +1,5 @@
 import AbstractPayment from './AbstractPayment'
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import Resources from './Resources'
 import Authorization from './Authorization'
 import Charge from './Charge'
@@ -11,8 +11,8 @@ export default class Payment extends AbstractPayment {
   private chargeList: Array<Charge>
   private cancelList: Array<Cancel>
 
-  constructor(heidelpay: Heidelpay) {
-    super(heidelpay)
+  constructor(unzer: Unzer) {
+    super(unzer)
     this.resources = new Resources()
   }
 

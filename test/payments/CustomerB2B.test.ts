@@ -1,10 +1,10 @@
 import { Customer, Salutation, Address } from '../../src/payments/Customer'
-import Heidelpay from '../../src/Heidelpay'
+import Unzer from '../../src/Unzer'
 import * as TestHelper from '../helpers/TestHelper'
 import * as TestCustomerHelper from '../helpers/CustomerTestHelper'
 
 describe('Customer test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   const { 
     createMiniumCustomer, 
     createFullCustomerWithComapanyInfoRegister,
@@ -13,11 +13,11 @@ describe('Customer test', () => {
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createHeidelpayInstance()
   })
 
   it('Test create minium customer', async () => {
-    const customer: Customer = await heidelpay.createCustomer(createMiniumCustomer())
+    const customer: Customer = await unzer.createCustomer(createMiniumCustomer())
 
     expect(customer).toBeInstanceOf(Customer)
     expect(customer.getFirstName()).toEqual(createMiniumCustomer().getFirstName())
@@ -26,7 +26,7 @@ describe('Customer test', () => {
 
   it('Test create full customer with company register', async () => {
     const fullCustomer = createFullCustomerWithComapanyInfoRegister()
-    const customer: Customer = await heidelpay.createCustomer(fullCustomer)
+    const customer: Customer = await unzer.createCustomer(fullCustomer)
 
     expect(customer).toBeInstanceOf(Customer)
     expect(customer.getCustomerId()).toBeDefined()
@@ -37,7 +37,7 @@ describe('Customer test', () => {
 
   it('Test create full customer with company not register', async () => {
     const fullCustomer = createFullCustomerWithComapanyInfoNotRegister()
-    const customer: Customer = await heidelpay.createCustomer(fullCustomer)
+    const customer: Customer = await unzer.createCustomer(fullCustomer)
 
     expect(customer).toBeInstanceOf(Customer)
     expect(customer.getCustomerId()).toBeDefined()
@@ -48,8 +48,8 @@ describe('Customer test', () => {
 
   it('Test fetch full customer with company register', async () => {
     const fullCustomer = createFullCustomerWithComapanyInfoRegister()
-    const customer: Customer = await heidelpay.createCustomer(fullCustomer)
-    const fetchCustomer = await heidelpay.fetchCustomer(customer.getCustomerId())
+    const customer: Customer = await unzer.createCustomer(fullCustomer)
+    const fetchCustomer = await unzer.fetchCustomer(customer.getCustomerId())
 
     expect(fetchCustomer).toBeInstanceOf(Customer)
     expect(fetchCustomer.getCustomerId()).toBeDefined()
@@ -61,22 +61,22 @@ describe('Customer test', () => {
 
   it('Test update customer', async () => {
     const fullCustomer = createFullCustomerWithComapanyInfoRegister()
-    const customer: Customer = await heidelpay.createCustomer(fullCustomer)
+    const customer: Customer = await unzer.createCustomer(fullCustomer)
 
     const updateDataCustomer = new Customer(customer.getFirstName(), customer.getLastName())
     updateDataCustomer.setFirstName("Max")
     updateDataCustomer.setCompany("CompanyX")
 
-    const updatedCustomer = await heidelpay.updateCustomer(customer.getCustomerId(), updateDataCustomer)
-    const fetchCustomer: Customer = await heidelpay.fetchCustomer(customer.getCustomerId())
+    const updatedCustomer = await unzer.updateCustomer(customer.getCustomerId(), updateDataCustomer)
+    const fetchCustomer: Customer = await unzer.fetchCustomer(customer.getCustomerId())
     expect(updatedCustomer.getFirstName()).toEqual(fetchCustomer.getFirstName())
     expect(updatedCustomer.getCompany()).toEqual(fetchCustomer.getCompany())
   })
 
   it('Test delete customer', async () => {
     const fullCustomer = createFullCustomerWithComapanyInfoRegister()
-    const customer: Customer = await heidelpay.createCustomer(fullCustomer)
-    const deleteCustomer = await heidelpay.deleteCustomer(customer.getCustomerId())
+    const customer: Customer = await unzer.createCustomer(fullCustomer)
+    const deleteCustomer = await unzer.deleteCustomer(customer.getCustomerId())
 
     expect(deleteCustomer).toBeTruthy()
   })

@@ -1,9 +1,9 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import SepaDirectDebit from '../../../src/payments/types/SepaDirectDebit'
 
 describe('Payment Type SepaDirectDebit Test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
 
   const getSepaDirectDebitConstructor = () => {
     return new SepaDirectDebit("DE89370400440532013000")
@@ -20,25 +20,25 @@ describe('Payment Type SepaDirectDebit Test', () => {
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createHeidelpayInstance()
   })
 
   it('Test Create SepaDirectDebit payment type', async () => {
-    const sepaDirectDebit: SepaDirectDebit = await heidelpay.createPaymentType(getSepaDirectDebitConstructor()) as SepaDirectDebit
+    const sepaDirectDebit: SepaDirectDebit = await unzer.createPaymentType(getSepaDirectDebitConstructor()) as SepaDirectDebit
 
     expect(sepaDirectDebit.getId()).toBeDefined()
   })
 
   it('Test Fetch SepaDirectDebit payment type', async () => {
-    const sepaDirectDebit: SepaDirectDebit = await heidelpay.createPaymentType(getSepaDirectDebit()) as SepaDirectDebit
-    const fetchSepaDirectDebit: SepaDirectDebit = await heidelpay.fetchPaymentType(sepaDirectDebit.getId()) as SepaDirectDebit
+    const sepaDirectDebit: SepaDirectDebit = await unzer.createPaymentType(getSepaDirectDebit()) as SepaDirectDebit
+    const fetchSepaDirectDebit: SepaDirectDebit = await unzer.fetchPaymentType(sepaDirectDebit.getId()) as SepaDirectDebit
 
     expect(fetchSepaDirectDebit.getId()).toEqual(sepaDirectDebit.getId())
   })
 
   it('Test geoLocation', async () => {
-    const sepaDirectDebit: SepaDirectDebit = await heidelpay.createPaymentType(getSepaDirectDebit()) as SepaDirectDebit
-    const fetchSepaDirectDebit: SepaDirectDebit = await heidelpay.fetchPaymentType(sepaDirectDebit.getId()) as SepaDirectDebit
+    const sepaDirectDebit: SepaDirectDebit = await unzer.createPaymentType(getSepaDirectDebit()) as SepaDirectDebit
+    const fetchSepaDirectDebit: SepaDirectDebit = await unzer.fetchPaymentType(sepaDirectDebit.getId()) as SepaDirectDebit
 
     expect(sepaDirectDebit.getGeoLocation()).toBeDefined()
     expect(fetchSepaDirectDebit.getGeoLocation()).toBeDefined()

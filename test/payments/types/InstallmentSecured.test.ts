@@ -1,4 +1,4 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import * as TestCustomerHelper from '../../helpers/CustomerTestHelper'
 import HirePurchasePlan from '../../../src/payments/types/HirePurchasePlan'
@@ -11,11 +11,11 @@ import Cancel from '../../../src/payments/business/Cancel'
 
 
 describe('InstallmentSecured test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createHeidelpayInstance()
   })
 
   const { 
@@ -25,14 +25,14 @@ describe('InstallmentSecured test', () => {
   const { createFullCustomer } = TestCustomerHelper
 
   it('Test Hire Purchase Plan', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await heidelpay.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
 
     expect(HirePurchasePlanList).toBeDefined()
     expect(HirePurchasePlanList.length).toEqual(6)
   })
 
   it('Test Create Hire Purchase Payment Type', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await heidelpay.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
     let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
 
@@ -55,12 +55,12 @@ describe('InstallmentSecured test', () => {
     .setInvoiceDate('2019-08-10')
     .setInvoiceDueDate('2020-08-30')
     
-    installmentSecured = await heidelpay.createPaymentType(installmentSecured) as InstallmentSecured
+    installmentSecured = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
     expect(installmentSecured.getId()).toBeDefined()
   })
 
   it('should return amount equal to grossAmount when calling cancelCharge and passing gross, net and vat amounts', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await heidelpay.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
     let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
 
@@ -83,29 +83,29 @@ describe('InstallmentSecured test', () => {
       .setInvoiceDate('2019-08-10')
       .setInvoiceDueDate('2020-08-30')
 
-    const customer: Customer = await heidelpay.createCustomer(createFullCustomer())
+    const customer: Customer = await unzer.createCustomer(createFullCustomer())
     const customerId: string = customer.getCustomerId()
-    const basket: Basket = await heidelpay.createBasket(createBasketWithAmountVat())
+    const basket: Basket = await unzer.createBasket(createBasketWithAmountVat())
     const basketId: string = basket.getId()
 
-    const InstallmentSecuredPaymentType = await heidelpay.createPaymentType(installmentSecured) as InstallmentSecured
+    const InstallmentSecuredPaymentType = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
     const InstallmentSecuredPaymentId: string = InstallmentSecuredPaymentType.getId()
-    const auth: Authorization = await heidelpay.authorize(getAuthorizationWithInterest(InstallmentSecuredPaymentId, customerId, basketId))
+    const auth: Authorization = await unzer.authorize(getAuthorizationWithInterest(InstallmentSecuredPaymentId, customerId, basketId))
     const authPaymentId = auth.getResources().getPaymentId()
-    const charge: Charge = await heidelpay.chargeAuthorization(getChargeAuthorization(authPaymentId))
+    const charge: Charge = await unzer.chargeAuthorization(getChargeAuthorization(authPaymentId))
     const chargePaymentId: string = charge.getResources().getPaymentId()
     const chargeId: string = charge.getId()
     const amountGross: string = '100.0000'
     const amountNet: string = '90.00'
     const amountVat: string = '10.00'
-    const cancelCharge: Cancel = await heidelpay.cancelCharge(getCancelChargeHirePurchase(chargePaymentId, chargeId, amountGross, amountNet, amountVat))
+    const cancelCharge: Cancel = await unzer.cancelCharge(getCancelChargeHirePurchase(chargePaymentId, chargeId, amountGross, amountNet, amountVat))
     const cancelAmount: string = cancelCharge.getAmount()
 
     expect(cancelAmount).toEqual(amountGross)
   })
 
   it('should allow to update InstallmentSecured after creating InstallmentSecured payment type', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await heidelpay.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
     const installmentSecured: InstallmentSecured = new InstallmentSecured()
     const HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
 
@@ -128,9 +128,9 @@ describe('InstallmentSecured test', () => {
       .setInvoiceDate('2019-08-10')
       .setInvoiceDueDate('2020-08-30')
 
-    const InstallmentSecuredOriginal = await heidelpay.createPaymentType(installmentSecured) as InstallmentSecured
+    const InstallmentSecuredOriginal = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
     const InstallmentSecuredPaymentId: string = InstallmentSecuredOriginal.getId()
-    const InstallmentSecuredUpdated = await heidelpay.updateHirePurchase(InstallmentSecuredPaymentId, getUpdateHirePurchase('Michael Jordan', '2020-12-12')) 
+    const InstallmentSecuredUpdated = await unzer.updateHirePurchase(InstallmentSecuredPaymentId, getUpdateHirePurchase('Michael Jordan', '2020-12-12')) 
     
     expect(InstallmentSecuredOriginal.getAccountHolder()).not.toBe(InstallmentSecuredUpdated.getAccountHolder())
     expect(InstallmentSecuredOriginal.getAccountHolder()).toBe('Rene Felder')
@@ -146,7 +146,7 @@ describe('InstallmentSecured test', () => {
   })
 
   it('Test fetch InstallmentSecured', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await heidelpay.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
     let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
 
@@ -169,14 +169,14 @@ describe('InstallmentSecured test', () => {
       .setInvoiceDate('2019-08-10')
       .setInvoiceDueDate('2020-08-30')
 
-    installmentSecured = await heidelpay.createPaymentType(installmentSecured) as InstallmentSecured
-    const fetchHirePurchase = await heidelpay.fetchPaymentType(installmentSecured.getId()) as InstallmentSecured
+    installmentSecured = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
+    const fetchHirePurchase = await unzer.fetchPaymentType(installmentSecured.getId()) as InstallmentSecured
 
     expect(installmentSecured.getId()).toEqual(fetchHirePurchase.getId())
   })
 
   it('Test geolocation', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await heidelpay.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
     let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
 
@@ -199,8 +199,8 @@ describe('InstallmentSecured test', () => {
       .setInvoiceDate('2019-08-10')
       .setInvoiceDueDate('2020-08-30')
 
-    installmentSecured = await heidelpay.createPaymentType(installmentSecured) as InstallmentSecured
-    const fetchInstallmentSecured = await heidelpay.fetchPaymentType(installmentSecured.getId()) as InstallmentSecured
+    installmentSecured = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
+    const fetchInstallmentSecured = await unzer.fetchPaymentType(installmentSecured.getId()) as InstallmentSecured
 
     expect(installmentSecured.getGeoLocation()).toBeDefined()
     expect(fetchInstallmentSecured.getGeoLocation()).toBeDefined()

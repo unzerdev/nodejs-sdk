@@ -9,7 +9,7 @@ export default (typeId: string, paymentService: PaymentService): Promise<Payment
       // Parse paymentTypeId string to typeId and create a PaymentType
       const paymentType: AbstractPaymentType = Utils.getPaymentTypeFromTypeId(typeId)
 
-      // Set Heidelpay instance
+      // Set Unzer instance
       paymentType.setHeidelpay(paymentService.getHeidelpay())
 
       // Parse URL with parameters

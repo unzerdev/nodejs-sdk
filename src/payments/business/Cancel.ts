@@ -1,5 +1,5 @@
 import AbstractPayment from './AbstractPayment'
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import Resources from './Resources'
 import Processing from './Processing';
 
@@ -11,8 +11,8 @@ export default class Cancel extends AbstractPayment {
   private resources: Resources
   private processing: Processing
 
-  constructor(heidelpay: Heidelpay) {
-    super(heidelpay)
+  constructor(unzer: Unzer) {
+    super(unzer)
     this.resources = new Resources()
     this.processing = new Processing()
   }

@@ -1,9 +1,9 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import InvoiceFactoring from '../../../src/payments/types/InvoiceFactoring'
 
 describe('Payment Type InvoiceFactoring Test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
 
   const getInvoiceFactoring = () => {
     return new InvoiceFactoring()
@@ -11,24 +11,24 @@ describe('Payment Type InvoiceFactoring Test', () => {
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createHeidelpayInstance()
   })
 
   it('Test Create InvoiceFactoring payment type', async () => {
-    const invoiceFactoring: InvoiceFactoring = await heidelpay.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
+    const invoiceFactoring: InvoiceFactoring = await unzer.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
 
     expect(invoiceFactoring.getId()).toBeDefined()
   })
 
   it('Test Fetch InvoiceFactoring payment type', async () => {
-    const invoiceFactoring: InvoiceFactoring = await heidelpay.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
-    const fetchInvoiceFactoring: InvoiceFactoring = await heidelpay.fetchPaymentType(invoiceFactoring.getId()) as InvoiceFactoring
+    const invoiceFactoring: InvoiceFactoring = await unzer.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
+    const fetchInvoiceFactoring: InvoiceFactoring = await unzer.fetchPaymentType(invoiceFactoring.getId()) as InvoiceFactoring
 
     expect(fetchInvoiceFactoring.getId()).toEqual(invoiceFactoring.getId())
   })
 
   it('should return an invoiceId if invoiceId is set', async () => {
-    const invoiceFactoring: InvoiceFactoring = await heidelpay.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
+    const invoiceFactoring: InvoiceFactoring = await unzer.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
     invoiceFactoring.setInvoiceId('invoice123')
 
     expect(invoiceFactoring.getInvoiceId()).toBe('invoice123')
@@ -36,15 +36,15 @@ describe('Payment Type InvoiceFactoring Test', () => {
   })
 
   it('should return an empty object if invoiceId is not set', async () => {
-    const invoiceFactoring: InvoiceFactoring = await heidelpay.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
+    const invoiceFactoring: InvoiceFactoring = await unzer.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
 
     expect(invoiceFactoring.getPayload().invoiceId).toBe(undefined)
     expect(invoiceFactoring.getPayload()).toEqual({})
   })
 
   it('Test geoLocation', async () => {
-    const invoiceFactoring: InvoiceFactoring = await heidelpay.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
-    const fetchInvoiceFactoring: InvoiceFactoring = await heidelpay.fetchPaymentType(invoiceFactoring.getId()) as InvoiceFactoring
+    const invoiceFactoring: InvoiceFactoring = await unzer.createPaymentType(getInvoiceFactoring()) as InvoiceFactoring
+    const fetchInvoiceFactoring: InvoiceFactoring = await unzer.fetchPaymentType(invoiceFactoring.getId()) as InvoiceFactoring
 
     expect(invoiceFactoring.getGeoLocation()).toBeDefined()
     expect(fetchInvoiceFactoring.getGeoLocation()).toBeDefined()

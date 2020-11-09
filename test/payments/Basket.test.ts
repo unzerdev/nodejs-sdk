@@ -1,26 +1,26 @@
 import Basket from '../../src/payments/Basket'
-import Heidelpay from '../../src/Heidelpay'
+import Unzer from '../../src/Unzer'
 import * as TestHelper from '../helpers/TestHelper'
 
 describe('Basket test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   const { createBasket, createBasketWithOneItemsForUpdate, createBasketWithTwoItemsForUpdate } = TestHelper
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createHeidelpayInstance()
   })
 
   it('Test create a baskset', async () => {
-    const basket: Basket = await heidelpay.createBasket(createBasket())
+    const basket: Basket = await unzer.createBasket(createBasket())
 
     expect(basket).toBeInstanceOf(Basket)
     expect(basket.getId()).toBeDefined()
   })
 
   it('Test create and fetch baskset', async () => {
-    const basket: Basket = await heidelpay.createBasket(createBasket())
-    const fetchedBasket: Basket = await heidelpay.fetchBasket(basket.getId())
+    const basket: Basket = await unzer.createBasket(createBasket())
+    const fetchedBasket: Basket = await unzer.fetchBasket(basket.getId())
     
     expect(basket).toBeInstanceOf(Basket)
     expect(fetchedBasket).toBeInstanceOf(Basket)
@@ -28,34 +28,34 @@ describe('Basket test', () => {
   })
 
   it('Test create and update baskset', async () => {
-    const basket: Basket = await heidelpay.createBasket(createBasket())
-    const fetchedNewBasket = await heidelpay.fetchBasket(basket.getId())
+    const basket: Basket = await unzer.createBasket(createBasket())
+    const fetchedNewBasket = await unzer.fetchBasket(basket.getId())
 
     const updateBasket = createBasketWithOneItemsForUpdate(fetchedNewBasket.getOrderId())
 
-    const updatedBasket = await heidelpay.updateBasket(fetchedNewBasket.getId(), updateBasket)
-    const fetchedUpdateBasket = await heidelpay.fetchBasket(updatedBasket.getId())
+    const updatedBasket = await unzer.updateBasket(fetchedNewBasket.getId(), updateBasket)
+    const fetchedUpdateBasket = await unzer.fetchBasket(updatedBasket.getId())
     
     expect(fetchedUpdateBasket.getOrderId()).toEqual(updateBasket.getOrderId())
     expect(fetchedUpdateBasket.getNote()).toEqual(updateBasket.getNote())
   })
 
   it('Test create and update baskset item', async () => {
-    const basket: Basket = await heidelpay.createBasket(createBasket())
-    const fetchedNewBasket = await heidelpay.fetchBasket(basket.getId())
+    const basket: Basket = await unzer.createBasket(createBasket())
+    const fetchedNewBasket = await unzer.fetchBasket(basket.getId())
 
     const updateBasket = createBasketWithTwoItemsForUpdate(fetchedNewBasket.getOrderId())
 
-    const updatedBasket = await heidelpay.updateBasket(fetchedNewBasket.getId(), updateBasket)
-    const fetchedUpdateBasket = await heidelpay.fetchBasket(updatedBasket.getId())
+    const updatedBasket = await unzer.updateBasket(fetchedNewBasket.getId(), updateBasket)
+    const fetchedUpdateBasket = await unzer.fetchBasket(updatedBasket.getId())
     
     expect(fetchedNewBasket.getItems()).toHaveLength(1)
     expect(fetchedUpdateBasket.getItems()).toHaveLength(2)
   })
 
   it('should return at least 13 keys inside basketItemObject', async () => {
-    const basket: Basket = await heidelpay.createBasket(createBasket())
-    const fetchedNewBasket: Basket = await heidelpay.fetchBasket(basket.getId())
+    const basket: Basket = await unzer.createBasket(createBasket())
+    const fetchedNewBasket: Basket = await unzer.fetchBasket(basket.getId())
     const basketPayload: object = fetchedNewBasket.getPayload()
     const basketItem: [] = basketPayload['basketItems'][0]
     const basketItemKeys = Object.keys(basketItem)

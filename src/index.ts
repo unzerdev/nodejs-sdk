@@ -1,4 +1,4 @@
-import Heidelpay from './Heidelpay'
+import Unzer from './Unzer'
 import { Customer, Address, Salutation } from './payments/Customer'
 import Metadata from './payments/Metadata'
 import Resources from './payments/business/Resources'
@@ -25,7 +25,7 @@ import WechatPay from './payments/types/WechatPay'
 import HirePurchase from './payments/types/HirePurchase'
 import InstallmentSecured from './payments/types/InstallmentSecured'
 
-export default Heidelpay
+export default Unzer
 export {
   Customer,
   Metadata,

@@ -1,17 +1,17 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import Linkpay from '../../../src/payments/paypage/Linkpay'
 
 describe('Linkpay test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
+    unzer = TestHelper.createHeidelpayInstance()
   })
 
   it('Test init linkpay authorize', async () => {
-    const linkpay: Linkpay = await heidelpay.initAuthorizeLinkpay(TestHelper.createMinimumLinkpay())
+    const linkpay: Linkpay = await unzer.initAuthorizeLinkpay(TestHelper.createMinimumLinkpay())
     expect(linkpay).toBeInstanceOf(Linkpay)
     expect(linkpay.getId()).toBeDefined()
     expect(linkpay.getRedirectUrl()).toBeDefined()
@@ -19,7 +19,7 @@ describe('Linkpay test', () => {
   })
 
   it('Test init linkpay charge', async () => {
-    const linkpay: Linkpay = await heidelpay.initChargeLinkpay(TestHelper.createMinimumLinkpay())
+    const linkpay: Linkpay = await unzer.initChargeLinkpay(TestHelper.createMinimumLinkpay())
     expect(linkpay).toBeInstanceOf(Linkpay)
     expect(linkpay.getId()).toBeDefined()
     expect(linkpay.getRedirectUrl()).toBeDefined()
@@ -27,7 +27,7 @@ describe('Linkpay test', () => {
   })
 
   it('Test init linkpay authorize with extensive data', async () => {
-    const linkpay: Linkpay = await heidelpay.initAuthorizeLinkpay(TestHelper.createExtensiveLinkpay())
+    const linkpay: Linkpay = await unzer.initAuthorizeLinkpay(TestHelper.createExtensiveLinkpay())
 
     expect(linkpay).toBeInstanceOf(Linkpay)
     expect(linkpay.getId()).toBeDefined()
@@ -44,12 +44,12 @@ describe('Linkpay test', () => {
     expect(linkpay.getLogoImage()).toBeDefined()
     expect(linkpay.getFullPageImage()).toBeDefined()
     expect(linkpay.getShopName()).toEqual('A cool shop in the neighborhood')
-    expect(linkpay.getReturnUrl()).toEqual('https://www.heidelpay.com')
-    expect(linkpay.getTermsAndConditionUrl()).toEqual('https://www.heidelpay.com/en/')
-    expect(linkpay.getPrivacyPolicyUrl()).toEqual('https://www.heidelpay.com/en/')
+    expect(linkpay.getReturnUrl()).toEqual('https://www.unzer.com')
+    expect(linkpay.getTermsAndConditionUrl()).toEqual('https://www.unzer.com/en/')
+    expect(linkpay.getPrivacyPolicyUrl()).toEqual('https://www.unzer.com/en/')
     expect(linkpay.getShopDescription()).toEqual('Come and buy')
-    expect(linkpay.getImprintUrl()).toEqual('https://www.heidelpay.com/en/')
-    expect(linkpay.getContactUrl()).toEqual('https://www.heidelpay.com/en/')
+    expect(linkpay.getImprintUrl()).toEqual('https://www.unzer.com/en/')
+    expect(linkpay.getContactUrl()).toEqual('https://www.unzer.com/en/')
     expect(linkpay.getShippingAddressRequired()).toEqual('true')
     expect(linkpay.getBillingAddressRequired()).toEqual('true')
     expect(linkpay.getTagline()).toEqual('Tagline123')
@@ -59,7 +59,7 @@ describe('Linkpay test', () => {
   })
 
   it('Test init linkpay charge with extensive data', async () => {
-    const linkpay: Linkpay = await heidelpay.initChargeLinkpay(TestHelper.createExtensiveLinkpay())
+    const linkpay: Linkpay = await unzer.initChargeLinkpay(TestHelper.createExtensiveLinkpay())
 
     expect(linkpay).toBeInstanceOf(Linkpay)
     expect(linkpay.getId()).toBeDefined()
@@ -76,12 +76,12 @@ describe('Linkpay test', () => {
     expect(linkpay.getLogoImage()).toBeDefined()
     expect(linkpay.getFullPageImage()).toBeDefined()
     expect(linkpay.getShopName()).toEqual('A cool shop in the neighborhood')
-    expect(linkpay.getReturnUrl()).toEqual('https://www.heidelpay.com')
-    expect(linkpay.getTermsAndConditionUrl()).toEqual('https://www.heidelpay.com/en/')
-    expect(linkpay.getPrivacyPolicyUrl()).toEqual('https://www.heidelpay.com/en/')
+    expect(linkpay.getReturnUrl()).toEqual('https://www.unzer.com')
+    expect(linkpay.getTermsAndConditionUrl()).toEqual('https://www.unzer.com/en/')
+    expect(linkpay.getPrivacyPolicyUrl()).toEqual('https://www.unzer.com/en/')
     expect(linkpay.getShopDescription()).toEqual('Come and buy')
-    expect(linkpay.getImprintUrl()).toEqual('https://www.heidelpay.com/en/')
-    expect(linkpay.getContactUrl()).toEqual('https://www.heidelpay.com/en/')
+    expect(linkpay.getImprintUrl()).toEqual('https://www.unzer.com/en/')
+    expect(linkpay.getContactUrl()).toEqual('https://www.unzer.com/en/')
     expect(linkpay.getShippingAddressRequired()).toEqual('true')
     expect(linkpay.getBillingAddressRequired()).toEqual('true')
     expect(linkpay.getTagline()).toEqual('Tagline123')
@@ -91,7 +91,7 @@ describe('Linkpay test', () => {
   })
 
   it('Test init linkpay charge with CSS and orderId', async () => {
-    const linkpay: Linkpay = await heidelpay.initChargeLinkpay(TestHelper.createLinkpayWithOrderIdAndCss())
+    const linkpay: Linkpay = await unzer.initChargeLinkpay(TestHelper.createLinkpayWithOrderIdAndCss())
 
     expect(linkpay).toBeInstanceOf(Linkpay)
     expect(linkpay.getId()).toBeDefined()
@@ -101,9 +101,9 @@ describe('Linkpay test', () => {
   })
 
   it('Test update linkpay (charge)', async () => {
-    const linkpay: Linkpay = await heidelpay.initChargeLinkpay(TestHelper.createExtensiveLinkpay())
+    const linkpay: Linkpay = await unzer.initChargeLinkpay(TestHelper.createExtensiveLinkpay())
     const linkpayId: string = linkpay.getId()
-    const updatedLinkpay: Linkpay = await heidelpay.updateLinkpay(linkpayId, TestHelper.updateLinkpayAmountAndTagline())
+    const updatedLinkpay: Linkpay = await unzer.updateLinkpay(linkpayId, TestHelper.updateLinkpayAmountAndTagline())
 
     expect(linkpay).toBeInstanceOf(Linkpay)
     expect(linkpay.getId()).toBeDefined()
@@ -118,9 +118,9 @@ describe('Linkpay test', () => {
   })
 
   it('Test update linkpay (authorize)', async () => {
-    const linkpay: Linkpay = await heidelpay.initAuthorizeLinkpay(TestHelper.createExtensiveLinkpay())
+    const linkpay: Linkpay = await unzer.initAuthorizeLinkpay(TestHelper.createExtensiveLinkpay())
     const linkpayId: string = linkpay.getId()
-    const updatedLinkpay: Linkpay = await heidelpay.updateLinkpay(linkpayId, TestHelper.updateLinkpayAmountAndTagline())
+    const updatedLinkpay: Linkpay = await unzer.updateLinkpay(linkpayId, TestHelper.updateLinkpayAmountAndTagline())
 
     expect(linkpay).toBeInstanceOf(Linkpay)
     expect(linkpay.getId()).toBeDefined()
@@ -135,9 +135,9 @@ describe('Linkpay test', () => {
   })
 
   it('Test delete linkpay', async () => {
-    const linkpay: Linkpay = await heidelpay.initChargeLinkpay(TestHelper.createLinkpayWithOrderIdAndCss())
+    const linkpay: Linkpay = await unzer.initChargeLinkpay(TestHelper.createLinkpayWithOrderIdAndCss())
     const linkpayId: string = linkpay.getId()
-    const deletedLinkpay = await heidelpay.deleteLinkpay(linkpayId)
+    const deletedLinkpay = await unzer.deleteLinkpay(linkpayId)
     
     expect(deletedLinkpay).toBe('')
   })

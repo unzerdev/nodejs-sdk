@@ -1,4 +1,4 @@
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import AbstractPayment from './AbstractPayment'
 import { Customer } from '../Customer'
 import Resources from './Resources'
@@ -18,8 +18,8 @@ export default class Charge extends AbstractPayment {
   private processing: Processing
   private invoiceId: string
 
-  constructor(heidelpay: Heidelpay) {
-    super(heidelpay)
+  constructor(unzer: Unzer) {
+    super(unzer)
     this.resources = new Resources()
     this.processing = new Processing()
   }

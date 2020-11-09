@@ -22,7 +22,7 @@ export default (amount: string, currency: string, effectiveInterestRate: string,
       const hirepurchasePlansList: Array<HirePurchasePlan> = []
 
       response.entity.map((item:any) => {
-        // Create new instance heidelpay
+        // Create new instance
         const hirePurchasePlan = new HirePurchasePlan()  
 
         // Set values foreach property

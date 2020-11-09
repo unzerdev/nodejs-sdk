@@ -1,15 +1,15 @@
-# Heidelpay SDK NodeJS
+# Unzer SDK NodeJS
 
 ![License](https://img.shields.io/npm/l/@heidelpay/nodejs-sdk.svg)
 [![Version](https://img.shields.io/npm/v/@heidelpay/nodejs-sdk.svg)](https://www.npmjs.com/package/@heidelpay/nodejs-sdk)
 [![Download](https://img.shields.io/npm/dw/@heidelpay/nodejs-sdk.svg)](https://www.npmjs.com/package/@heidelpay/nodejs-sdk)
 
-The Heidelpay SDK NodeJS provides convenient access to the Heidelpay API from
+The Unzer SDK NodeJS provides convenient access to the Unzer API from
 applications written in server-side JavaScript.
 
 # **Documentation**
 
-See the [Node API docs](https://docs.heidelpay.com/v1.0/docs/nodejs-sdk).
+See the [Node API docs](https://docs.unzer.com/docs/nodejs-sdk).
 
 # **Installation**
 
@@ -23,40 +23,40 @@ Install the package with:
 
 Using Common JS
 ``` js
-var Heidelpay = require('@heidelpay/nodejs-sdk').default;
+var Unzer = require('@heidelpay/nodejs-sdk').default;
 
-// Create new instance Heidelpay
-var heidelpay = new Heidelpay('s-priv-...');
+// Create new instance Unzer
+var unzer = new Unzer('s-priv-...');
 ```
 
 Or using ES module
 
 ``` js
-import Heidelpay from '@heidelpay/nodejs-sdk';
+import Unzer from '@heidelpay/nodejs-sdk';
 
-// Create new instance Heidelpay
-const heidelpay = new Heidelpay('s-priv-...');
+// Create new instance Unzer
+const unzer = new Unzer('s-priv-...');
 ```
 
 Or using TypeScript:
 
 ``` ts
-import Heidelpay from '@heidelpay/nodejs-sdk';
+import Unzer from '@heidelpay/nodejs-sdk';
 
-// Create new instance Heidelpay
-const heidelpay = new Heidelpay('s-priv-...');
+// Create new instance Unzer
+const unzer = new Unzer('s-priv-...');
 ```
 
 # **Example**
 ## Using Promise
 > Authorize with a payment type (Card)
 ```js
-var Heidelpay = require('@heidelpay/nodejs-sdk').default;
+var Unzer = require('@heidelpay/nodejs-sdk').default;
 var Card = require('@heidelpay/nodejs-sdk').Card;
 var Customer = require('@heidelpay/nodejs-sdk').Customer;
 
-// Create new instance Heidelpay
-var heidelpay = new Heidelpay('s-priv-...');
+// Create new instance Unzer
+var unzer = new Unzer('s-priv-...');
 
 // New a card with pan number and exipry date
 var card = new Card('471110xxxxxx0000', '01/xxxx');
@@ -69,7 +69,7 @@ var customer = new Customer('Rene', 'Fred');
 
 heidelpay.createCustomer(customer).then(function(newCustomer) {
   // Create payment type then authorize (Card)
-  return heidelpay.createPaymentType(card);
+  return unzer.createPaymentType(card);
 }).then(function(paymentCard) {    
   // Authorize with payment card
   return paymentCard.authorize({
@@ -89,10 +89,10 @@ heidelpay.createCustomer(customer).then(function(newCustomer) {
 
 ## Using async / await (ES6 style)
 ```js
-import Heidelpay, {Card} from '@heidelpay/nodejs-sdk';
+import Unzer, {Card} from '@heidelpay/nodejs-sdk';
 
-// Create new instance Heidelpay
-const heidelpay = new Heidelpay('s-priv-...');
+// Create new instance Unzer
+const unzer = new Unzer('s-priv-...');
 
 // New a card with pan number and exipry date
 const card = new Card('471110xxxxxx0000', '01/xxxx');
@@ -106,10 +106,10 @@ const customer = new Customer('Rene', 'Fred');
 // Should wrap these code into async function (async/await syntax)
 try {
   // Create a new customer
-  const newCustomer = await heidelpay.createCustomer(customer);
+  const newCustomer = await unzer.createCustomer(customer);
 
   // Create payment type then authorize (Card)
-  const paymentCard = await heidelpay.createPaymentType(card);
+  const paymentCard = await unzer.createPaymentType(card);
 
   // Authorize with payment card
   const authorize = await paymentCard.authorize({
@@ -123,6 +123,41 @@ try {
   console.log('error', error);
 }
 ```
+
+## Supported payment types
+*   Card (credit card and debit card) + Recurring
+*   Giropay
+*   iDEAL
+*   Invoice (guaranteed)
+*   PayPal + Recurring
+*   Prepayment
+*   Przelewy24
+*   SEPA direct debit (guaranteed) + Recurring
+*   SOFORT
+*   EPS
+*   Unzer Bank Transfer
+*   Alipay
+*   WeChat Pay
+*   Invoice Factoring
+*   Unzer Instalment
+
+## Supported features
+*   Webhooks and event handling
+*   Payment Page (embedded and hosted)
+*   Payout (Credit)
+*   Recurring Payment
+
+## Support
+For any issues or questions please get in touch with our support team.
+
+### Web page
+[https://docs.unzer.com/](https://docs.unzer.com/)
+
+### Email
+[support@unzer.com](mailto:support@unzer.com)
+
+### Phone
+[+49 6221 43101-00](tel:+49-6221 43101 00)
 
 # **License**
 Apache 2.0

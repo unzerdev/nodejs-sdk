@@ -4,18 +4,18 @@
  * @Last Modified by: Minh Tri Nguyen
  * @Last Modified time: 2018-11-20 12:08:41
  */
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import Resources from './Resources'
 import Payment from './Payment';
 
 export default abstract class AbstractPayment {
   private _id: string
-  private _heidelpay: Heidelpay
+  private _unzer: Unzer
   private _payment: Payment
   private _payload: object
 
-  constructor(heidelpay: Heidelpay) {
-    this._heidelpay = heidelpay
+  constructor(unzer: Unzer) {
+    this._unzer = unzer
     this._id = ''
   }
 
@@ -38,12 +38,12 @@ export default abstract class AbstractPayment {
   }
 
   /**
-   * Get instance Heidelpay
+   * Get instance Unzer
    *
-   * @returns {Heidelpay}
+   * @returns {Unzer}
    */
-  public getHeidelpay(): Heidelpay {
-    return this._heidelpay
+  public getHeidelpay(): Unzer {
+    return this._unzer
   }
 
   /**

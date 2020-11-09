@@ -1,4 +1,4 @@
-import Heidelpay from '../../Heidelpay'
+import Unzer from '../../Unzer'
 import AbstractPayment from './AbstractPayment'
 import { Customer } from '../Customer'
 import Resources from './Resources'
@@ -14,8 +14,8 @@ export default class Payout extends AbstractPayment {
   private resources: Resources
   private processing: Processing
 
-  constructor(heidelpay: Heidelpay) {
-    super(heidelpay)
+  constructor(unzer: Unzer) {
+    super(unzer)
     this.resources = new Resources()
     this.processing = new Processing()
   }

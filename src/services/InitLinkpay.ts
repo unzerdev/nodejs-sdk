@@ -24,7 +24,7 @@ export default (linkpay: Linkpay, type: string, paymentService: PaymentService):
       // Map returned values to new Linkpay instance
       const newLinkpay: Linkpay = ResponseLinkpayMapper(response, linkpay)
 
-      // Set Heidelpay instance
+      // Set Unzer instance
       newLinkpay.setHeidelpay(paymentService.getHeidelpay())
 
       // Reset payload obj to empty obj

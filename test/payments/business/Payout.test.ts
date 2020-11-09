@@ -1,4 +1,4 @@
-import Heidelpay from '../../../src/Heidelpay'
+import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import * as TestCustomerHelper from '../../helpers/CustomerTestHelper'
 import Payout from '../../../src/payments/business/Payout'
@@ -8,15 +8,15 @@ import { Customer } from '../../../src/payments/Customer'
 import Payment from '../../../src/payments/business/Payment'
 
 describe('Payout test', () => {
-  let heidelpay: Heidelpay
+  let unzer: Unzer
   let createPaymentTypeCard
   const { getPayout } = TestHelper
   const { createFullCustomer } = TestCustomerHelper
 
   beforeAll(() => {
     jest.setTimeout(TestHelper.getTimeout())
-    heidelpay = TestHelper.createHeidelpayInstance()
-    createPaymentTypeCard = TestHelper.createPaymentTypeCard(heidelpay)
+    unzer = TestHelper.createHeidelpayInstance()
+    createPaymentTypeCard = TestHelper.createPaymentTypeCard(unzer)
   })
 
   const getSepaDirectDebit = () => {
@@ -35,7 +35,7 @@ describe('Payout test', () => {
 
   it('Test payout with Credit Card', async () => {
     const card = await createPaymentTypeCard()
-    const payout: Payout = await heidelpay.payout(getPayout(card.getId()))
+    const payout: Payout = await unzer.payout(getPayout(card.getId()))
 
     expect(payout).toBeInstanceOf(Payout)
     expect(payout.getId()).toBeDefined()
@@ -48,8 +48,8 @@ describe('Payout test', () => {
   })
 
   it('Test payout with Sepa Direct Debit', async () => {
-    const sepaDirectDebit: SepaDirectDebit = await heidelpay.createPaymentType(getSepaDirectDebit()) as SepaDirectDebit
-    const payout: Payout = await heidelpay.payout(getPayout(sepaDirectDebit.getId()))
+    const sepaDirectDebit: SepaDirectDebit = await unzer.createPaymentType(getSepaDirectDebit()) as SepaDirectDebit
+    const payout: Payout = await unzer.payout(getPayout(sepaDirectDebit.getId()))
 
     expect(payout).toBeInstanceOf(Payout)
     expect(payout.getId()).toBeDefined()
@@ -62,9 +62,9 @@ describe('Payout test', () => {
   })
 
   it('Test payout with Sepa Direct Debit Guaranteed', async () => {
-    const customer: Customer = await heidelpay.createCustomer(createFullCustomer())
-    const sepaDirectDebitGuaranteed: SepaDirectDebitGuaranteed = await heidelpay.createPaymentType(getSepaDirectDebitGuaranteed()) as SepaDirectDebitGuaranteed
-    const payout: Payout = await heidelpay.payout(getPayout(sepaDirectDebitGuaranteed.getId(), customer.getCustomerId()))
+    const customer: Customer = await unzer.createCustomer(createFullCustomer())
+    const sepaDirectDebitGuaranteed: SepaDirectDebitGuaranteed = await unzer.createPaymentType(getSepaDirectDebitGuaranteed()) as SepaDirectDebitGuaranteed
+    const payout: Payout = await unzer.payout(getPayout(sepaDirectDebitGuaranteed.getId(), customer.getCustomerId()))
 
     expect(payout).toBeInstanceOf(Payout)
     expect(payout.getId()).toBeDefined()
@@ -78,9 +78,9 @@ describe('Payout test', () => {
 
   it('Test fetch Payout payment', async () => {
     const card = await createPaymentTypeCard()
-    const payout: Payout = await heidelpay.payout(getPayout(card.getId()))
+    const payout: Payout = await unzer.payout(getPayout(card.getId()))
 
-    const payment: Payment = await heidelpay.fetchPayment(payout.getResources().getPaymentId()) as Payment
+    const payment: Payment = await unzer.fetchPayment(payout.getResources().getPaymentId()) as Payment
 
     expect(payout).toBeInstanceOf(Payout)
     expect(payment.getResources()).toBeDefined()
@@ -95,9 +95,9 @@ describe('Payout test', () => {
 
   it('Test fetch a Payout object', async () => {
     const card = await createPaymentTypeCard()
-    const payout: Payout = await heidelpay.payout(getPayout(card.getId()))
+    const payout: Payout = await unzer.payout(getPayout(card.getId()))
 
-    const fetchedPayout: Payout = await heidelpay.fetchPayout(payout.getResources().getPaymentId(), payout.getId()) as Payout
+    const fetchedPayout: Payout = await unzer.fetchPayout(payout.getResources().getPaymentId(), payout.getId()) as Payout
 
     expect(payout).toBeInstanceOf(Payout)
     expect(fetchedPayout).toBeInstanceOf(Payout)
@@ -113,7 +113,7 @@ describe('Payout test', () => {
 
   it('Test returned traceId', async () => {
     const card = await createPaymentTypeCard()
-    const payout: Payout = await heidelpay.payout(getPayout(card.getId()))
+    const payout: Payout = await unzer.payout(getPayout(card.getId()))
 
     expect(payout.getResources().getTraceId()).toBeDefined()
   })

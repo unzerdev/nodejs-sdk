@@ -14,7 +14,7 @@ import PIS from '../payments/types/Pis'
 import Alipay from '../payments/types/Alipay'
 import WechatPay from '../payments/types/WechatPay'
 import Bancontact from '../payments/types/Bancontact'
-import HirePurchase from '../payments/types/HirePurchase'
+import InstallmentSecured from '../payments/types/InstallmentSecured'
 import InvoiceSecured from '../payments/types/InvoiceSecured'
 
 /**
@@ -78,6 +78,8 @@ export const getPaymentTypeFromTypeId = (typeId: string): AbstractPaymentType =>
       return new Ideal()
     case 'ivc':
       return new Invoice()
+    case 'ivg':
+    case 'ivf':
     case 'ivs':
       return new InvoiceSecured()
     case 'ppy':
@@ -86,6 +88,7 @@ export const getPaymentTypeFromTypeId = (typeId: string): AbstractPaymentType =>
       return new Przelewy24()
     case 'sdd':
       return new SepaDirectDebit("")
+    case 'ddg':
     case 'dds':
       return new SepaDirectDebitSecured("")
     case 'sft':
@@ -99,7 +102,8 @@ export const getPaymentTypeFromTypeId = (typeId: string): AbstractPaymentType =>
     case 'bct':
       return new Bancontact()
     case 'hdd':
-      return new HirePurchase()
+    case 'ins':
+      return new InstallmentSecured()
     default:
       throw new Error(`Type ${typeId} is currently not supported by the SDK`)
   }
@@ -168,6 +172,8 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
       invoice.setGeoLocation(response.geoLocation)
       return invoice
 
+    case 'invoice-guaranteed':
+    case 'invoice-factoring':
     case 'invoice-secured':
       const invoiceSecured: InvoiceSecured = new InvoiceSecured()
 
@@ -198,6 +204,7 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
       sepaDirectDebit.setGeoLocation(response.geoLocation)
       return sepaDirectDebit
 
+    case 'sepa-direct-debit-guaranteed':
     case 'sepa-direct-debit-secured':
       const dds: SepaDirectDebitSecured = new SepaDirectDebitSecured(response.iban)
         .setBic(response.bic)
@@ -246,10 +253,11 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
       bancontact.setGeoLocation(response.geoLocation)
       return bancontact
 
+    case 'installment-secured':
     case 'hire-purchase-direct-debit':
-      const hirePurchase: HirePurchase = new HirePurchase()
+      const installmentSecured: InstallmentSecured = new InstallmentSecured()
 
-      hirePurchase
+      installmentSecured
         .setIban(response.iban)
         .setBic(response.bic)
         .setAccountHolder(response.accountHolder)
@@ -267,9 +275,9 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
         .setInvoiceDate(response.invoiceDate)
         .setInvoiceDueDate(response.invoiceDueDate)
 
-      hirePurchase.setId(response.id)
-      hirePurchase.setGeoLocation(response.geoLocation)
-      return hirePurchase
+      installmentSecured.setId(response.id)
+      installmentSecured.setGeoLocation(response.geoLocation)
+      return installmentSecured
 
     default:
       throw new Error(`Type ${response.method} is currently not supported by the SDK`)

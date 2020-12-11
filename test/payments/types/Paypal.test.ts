@@ -1,7 +1,10 @@
 import Unzer from '../../../src/Unzer'
+import Metadata from '../../../src/payments/Metadata'
+import { Customer } from '../../../src/payments/Customer'
 import * as TestHelper from '../../helpers/TestHelper'
+import * as CustomerTestHelper from '../../helpers/CustomerTestHelper'
 import Paypal from '../../../src/payments/types/Paypal'
-import Recurring from '../../../src/payments/business/Recurring'
+import Recurring, {recurringObject} from '../../../src/payments/business/Recurring'
 
 describe('Payment Type Paypal Test', () => {
   let unzer: Unzer
@@ -47,8 +50,18 @@ describe('Payment Type Paypal Test', () => {
   })
 
   it('Test recurring with complete data', async () => {
+    const createCustomer = CustomerTestHelper.createCustomer(unzer)
+    const metadata: Metadata = await unzer.createMetadata(TestHelper.createMetadataValue())
+    const customer: Customer = await createCustomer()
+
+    const recurringPayload: recurringObject = {
+      returnUrl: 'https://dev.unzer.com',
+      customerId: customer.getCustomerId(),
+      metadataId: metadata.getId(),
+    }
+
     const paypal: Paypal = await unzer.createPaymentType(getPaypal()) as Paypal
-    const recurring: Recurring = await unzer.startRecurring(paypal.getId(), TestHelper.getCompleteRecurringData())
+    const recurring: Recurring = await unzer.startRecurring(paypal.getId(), recurringPayload)
 
     expect(recurring).toBeInstanceOf(Recurring)
     expect(recurring.getReturnUrl()).toBe('https://dev.unzer.com')

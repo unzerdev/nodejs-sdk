@@ -124,7 +124,7 @@ describe('Webhook test', () => {
     const oldWebhookUrl = webhook.getUrl()
     const updatedWebhook = await unzer.updateWebhook(
       webhookId,
-      { url: `http://unzer.com/${Date.now()}` },
+      { url: `https://unzer.com/${Date.now()}` },
     )
 
     expect(updatedWebhook).toBeInstanceOf(Webhook)
@@ -143,7 +143,7 @@ describe('Webhook test', () => {
     const oldWebhookUrl = webhook.getUrl()
     const updatedWebhook = await unzer.updateWebhook(
       webhookId,
-      { url: `http://unzer.com/${Date.now()}` },
+      { url: `https://unzer.com/${Date.now()}` },
     )
 
     expect(updatedWebhook).toBeInstanceOf(Webhook)
@@ -162,7 +162,7 @@ describe('Webhook test', () => {
     const oldWebhookUrl = webhook.getUrl()
     const updatedWebhook = await unzer.updateWebhook(
       webhookId,
-      { url: `http://heidelpay.de/${Date.now()}` },
+      { url: `https://unzer.com/${Date.now()}` },
     )
 
     expect(updatedWebhook).toBeInstanceOf(Webhook)

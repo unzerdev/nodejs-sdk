@@ -10,6 +10,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Changed
 * `Heidelpay` in class names got replaced by `Unzer`
+* Removed payment type string from URL when fetching a payment type resource.
+* Added mapping of old payment type ids to the new payment type resources.
 * Replace payment methods `Guranteed/Factoring` by `Secured`
   | Current   | Replaced by |
   | ------------- | ------------- |
@@ -17,6 +19,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
   | InvoiceGuaranteed  | InvoiceSecured  |
   | InvoiceFactoring  | InvoiceSecured  |
   | HirePurchase  | InstallmentSecured  |
+* Several minor changes.
 
 
 ### Removed

@@ -39,15 +39,15 @@ import PayoutService from './Payout'
 import Payout, { payoutObject } from '../payments/business/Payout'
 import Recurring, { recurringObject } from '../payments/business/Recurring'
 import FetchPayout from './FetchPayout'
-import HirePurchasePlan from '../payments/types/HirePurchasePlan'
-import HirePurchase, { updateHirePurchaseObject } from '../payments/types/HirePurchase'
-import FetchHirePurchasePlan from './FetchHirePurchasePlan'
-import UpdateHirePurchase from './UpdateHirePurchase'
+import InstallmentSecured, { updateInstallmentSecuredObject } from '../payments/types/InstallmentSecured'
+import FetchInstallmentSecuredPlan from './FetchInstallmentSecuredPlan'
+import UpdateInstallmentSecured from './UpdateInstallmentSecured'
 import Webhook, { webhookObject } from '../payments/business/Webhook'
 import RegisterWebhook from './RegisterWebhook'
 import FetchWebhook from './FetchWebhook'
 import UpdateWebhook from './UpdateWebhook'
 import DeleteWebhook from './DeleteWebhook'
+import InstallmentSecuredPlan from '../payments/types/InstallmentSecuredPlan'
 
 export default class PaymentService {
   private requestAdapter: FetchAdapter
@@ -340,7 +340,7 @@ export default class PaymentService {
   }
 
   /**
-   * Fetch hire purchase plans
+   * Fetch installment secured plans
    *
    * @param {string} amount
    * @param {string} currency
@@ -348,19 +348,19 @@ export default class PaymentService {
    * @param {string} orderDate
    * @returns {Promise<Payment>}
    */
-  public fetchHirePurchasePlan(amount: string, currency: string, effectiveInterestRate: string, orderDate: string): Promise<Array<HirePurchasePlan>> {
-    return FetchHirePurchasePlan(amount, currency, effectiveInterestRate, orderDate, this)
+  public fetchInstallmentSecuredPlan(amount: string, currency: string, effectiveInterestRate: string, orderDate: string): Promise<Array<InstallmentSecuredPlan>> {
+    return FetchInstallmentSecuredPlan(amount, currency, effectiveInterestRate, orderDate, this)
   }
 
   /**
-  * Update HirePurchase
+  * Update InstallmentSecured
   *
-  * @param {string} hirePurchaseId
-  * @param {updateHirePurchaseObject} hirePurchase
-  * @returns {Promise<HirePurchase>}
+  * @param {string} installmentSecuredId
+  * @param {updateInstallmentSecuredObject} installmentSecured
+  * @returns {Promise<InstallmentSecured>}
   */
-  public updateHirePurchase(hirePurchaseId: string, hirePurchase: updateHirePurchaseObject): Promise<HirePurchase> {
-    return UpdateHirePurchase(hirePurchaseId, hirePurchase, this) 
+  public updateInstallmentSecured(installmentSecuredId: string, installmentSecured: updateInstallmentSecuredObject): Promise<InstallmentSecured> {
+    return UpdateInstallmentSecured(installmentSecuredId, installmentSecured, this) 
   }
 
   /**

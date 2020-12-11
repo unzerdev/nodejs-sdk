@@ -2,7 +2,7 @@ import * as apiURL from '../../configs/ApiUrls'
 import AbstractPaymentType from './AbstractPaymentType'
 import PaymentType from './PaymentType'
 
-export default class HirePurchasePlan extends AbstractPaymentType implements PaymentType {
+export default class InstallmentSecuredPlan extends AbstractPaymentType implements PaymentType {
   private _numberOfRates: number
   private _dayOfPurchase: string
   private _orderDate: string
@@ -24,9 +24,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Number of Rate
    *
    * @param {string} numberOfRates
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setNumberOfRates(numberOfRates: number): HirePurchasePlan {
+  public setNumberOfRates(numberOfRates: number): InstallmentSecuredPlan {
     this._numberOfRates = numberOfRates
     return this
   }
@@ -44,9 +44,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Day of purchase
    *
    * @param {string} dayOfPurchase
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setDayOfPurchase(dayOfPurchase: string): HirePurchasePlan {
+  public setDayOfPurchase(dayOfPurchase: string): InstallmentSecuredPlan {
     this._dayOfPurchase = dayOfPurchase
     return this
   }
@@ -64,9 +64,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Order Date
    *
    * @param {string} orderDate
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setOrderDate(orderDate: string): HirePurchasePlan {
+  public setOrderDate(orderDate: string): InstallmentSecuredPlan {
     this._orderDate = orderDate
     return this
   }
@@ -84,9 +84,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Total Purchase Amount
    *
    * @param {number} totalPurchaseAmount
-   * @returns {HirePurchasePlan}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setTotalPurchaseAmount(totalPurchaseAmount: number): HirePurchasePlan {
+  public setTotalPurchaseAmount(totalPurchaseAmount: number): InstallmentSecuredPlan {
     this._totalPurchaseAmount = totalPurchaseAmount
     return this
   }
@@ -104,9 +104,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Interest Amount
    *
    * @param {number} totalInterestAmount
-   * @returns {HirePurchasePlan}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setTotalInterestAmount(totalInterestAmount: number): HirePurchasePlan {
+  public setTotalInterestAmount(totalInterestAmount: number): InstallmentSecuredPlan {
     this._totalInterestAmount = totalInterestAmount
     return this
   }
@@ -124,9 +124,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Total Amount
    *
    * @param {number} totalAmount
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setTotalAmount(totalAmount: number): HirePurchasePlan {
+  public setTotalAmount(totalAmount: number): InstallmentSecuredPlan {
     this._totalAmount = totalAmount
     return this
   }
@@ -144,9 +144,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Effective Interest Rate
    *
    * @param {number} effectiveInterestRate
-   * @returns {HirePurchasePlan}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setEffectiveInterestRate(effectiveInterestRate: number): HirePurchasePlan {
+  public setEffectiveInterestRate(effectiveInterestRate: number): InstallmentSecuredPlan {
     this._effectiveInterestRate = effectiveInterestRate
     return this
   }
@@ -164,9 +164,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Nominal Interest Rate
    *
    * @param {number} nominalInterestRate
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setNominalInterestRate(nominalInterestRate: number): HirePurchasePlan {
+  public setNominalInterestRate(nominalInterestRate: number): InstallmentSecuredPlan {
     this._nominalInterestRate = nominalInterestRate
     return this
   }
@@ -184,9 +184,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Fee First Rate
    *
    * @param {number} feeFirstRate
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setFeeFirstRate(feeFirstRate: number): HirePurchasePlan {
+  public setFeeFirstRate(feeFirstRate: number): InstallmentSecuredPlan {
     this._feeFirstRate = feeFirstRate
     return this
   }
@@ -204,9 +204,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Fee Per Rate
    *
    * @param {number} feePerRate
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setFeePerRate(feePerRate: number): HirePurchasePlan {
+  public setFeePerRate(feePerRate: number): InstallmentSecuredPlan {
     this._feePerRate = feePerRate
     return this
   }
@@ -224,9 +224,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Monthly Rate
    *
    * @param {number} monthlyRate
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setMonthlyRate(monthlyRate: number): HirePurchasePlan {
+  public setMonthlyRate(monthlyRate: number): InstallmentSecuredPlan {
     this._monthlyRate = monthlyRate
     return this
   }
@@ -244,9 +244,9 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * Set Last Rate
    *
    * @param {number} lastRate
-   * @returns {HirePurchase}
+   * @returns {InstallmentSecuredPlan}
    */
-  public setLastRate(lastRate: number): HirePurchasePlan {
+  public setLastRate(lastRate: number): InstallmentSecuredPlan {
     this._lastRate = lastRate
     return this
   }
@@ -266,7 +266,7 @@ export default class HirePurchasePlan extends AbstractPaymentType implements Pay
    * @returns {string}
    */
   public getTypeUrl(): string {
-    return apiURL.URL_TYPE_HIRE_PURCHASE_PLANS
+    return apiURL.URL_TYPE_INSTALLMENT_SECURED_PLANS
   }
 
   /**

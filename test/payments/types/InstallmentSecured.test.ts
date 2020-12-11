@@ -1,7 +1,7 @@
 import Unzer from '../../../src/Unzer'
 import * as TestHelper from '../../helpers/TestHelper'
 import * as TestCustomerHelper from '../../helpers/CustomerTestHelper'
-import HirePurchasePlan from '../../../src/payments/types/HirePurchasePlan'
+import InstallmentSecuredPlan from '../../../src/payments/types/InstallmentSecuredPlan'
 import { Basket } from '../../../src'
 import InstallmentSecured from '../../../src/payments/types/InstallmentSecured'
 import Authorization from '../../../src/payments/business/Authorization'
@@ -20,62 +20,62 @@ describe('InstallmentSecured test', () => {
 
   const { 
     getAuthorizationWithInterest, getChargeAuthorization, 
-    getCancelChargeHirePurchase, getUpdateHirePurchase, createBasketWithAmountVat
+    getCancelChargeHirePurchase, getUpdateInstallmentSecured, createBasketWithAmountVat
   } = TestHelper
   const { createFullCustomer } = TestCustomerHelper
 
-  it('Test Hire Purchase Plan', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+  it('Test Installment Secured Plan', async () => {
+    const InstallmentSecuredPlanList: Array<InstallmentSecuredPlan> = await unzer.fetchInstallmentSecuredPlan('100', 'EUR', '5.99', '2019-03-21')
 
-    expect(HirePurchasePlanList).toBeDefined()
-    expect(HirePurchasePlanList.length).toEqual(6)
+    expect(InstallmentSecuredPlanList).toBeDefined()
+    expect(InstallmentSecuredPlanList.length).toEqual(6)
   })
 
-  it('Test Create Hire Purchase Payment Type', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+  it('Test Create Installment Secured Payment Type', async () => {
+    const InstallmentSecuredPlanList: Array<InstallmentSecuredPlan> = await unzer.fetchInstallmentSecuredPlan('100', 'EUR', '5.99', '2020-12-10')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
-    let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
+    let InstallmentSecuredPlan: InstallmentSecuredPlan = InstallmentSecuredPlanList[0]
 
-    installmentSecured.setNumberOfRates(HirePurchasePlan.getNumberOfRates())
-    .setDayOfPurchase(HirePurchasePlan.getDayOfPurchase())
-    .setOrderDate(HirePurchasePlan.getOrderDate())
-    .setTotalPurchaseAmount(HirePurchasePlan.getTotalPurchaseAmount())
-    .setTotalInterestAmount(HirePurchasePlan.getTotalInterestAmount())
-    .setTotalAmount(HirePurchasePlan.getTotalAmount())
-    .setEffectiveInterestRate(HirePurchasePlan.getEffectiveInterestRate())
-    .setNominalInterestRate(HirePurchasePlan.getNominalInterestRate())
-    .setFeeFirstRate(HirePurchasePlan.getFeeFirstRate())
-    .setFeePerRate(HirePurchasePlan.getFeePerRate())
-    .setMonthlyRate(HirePurchasePlan.getMonthlyRate())
-    .setLastRate(HirePurchasePlan.getLastRate())
+    installmentSecured.setNumberOfRates(InstallmentSecuredPlan.getNumberOfRates())
+    .setDayOfPurchase(InstallmentSecuredPlan.getDayOfPurchase())
+    .setOrderDate(InstallmentSecuredPlan.getOrderDate())
+    .setTotalPurchaseAmount(InstallmentSecuredPlan.getTotalPurchaseAmount())
+    .setTotalInterestAmount(InstallmentSecuredPlan.getTotalInterestAmount())
+    .setTotalAmount(InstallmentSecuredPlan.getTotalAmount())
+    .setEffectiveInterestRate(InstallmentSecuredPlan.getEffectiveInterestRate())
+    .setNominalInterestRate(InstallmentSecuredPlan.getNominalInterestRate())
+    .setFeeFirstRate(InstallmentSecuredPlan.getFeeFirstRate())
+    .setFeePerRate(InstallmentSecuredPlan.getFeePerRate())
+    .setMonthlyRate(InstallmentSecuredPlan.getMonthlyRate())
+    .setLastRate(InstallmentSecuredPlan.getLastRate())
 
     installmentSecured.setIban("DE46940594210000012345")
     .setBic("COBADEFFXXX")
     .setAccountHolder("Rene Felder")
-    .setInvoiceDate('2019-08-10')
-    .setInvoiceDueDate('2020-08-30')
+    .setInvoiceDate('2020-12-10')
+    .setInvoiceDueDate('2021-08-30')
     
     installmentSecured = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
     expect(installmentSecured.getId()).toBeDefined()
   })
 
   it('should return amount equal to grossAmount when calling cancelCharge and passing gross, net and vat amounts', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const InstallmentSecuredPlanList: Array<InstallmentSecuredPlan> = await unzer.fetchInstallmentSecuredPlan('100', 'EUR', '5.99', '2019-03-21')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
-    let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
+    let InstallmentSecuredPlan: InstallmentSecuredPlan = InstallmentSecuredPlanList[0]
 
-    installmentSecured.setNumberOfRates(HirePurchasePlan.getNumberOfRates())
-      .setDayOfPurchase(HirePurchasePlan.getDayOfPurchase())
-      .setOrderDate(HirePurchasePlan.getOrderDate())
-      .setTotalPurchaseAmount(HirePurchasePlan.getTotalPurchaseAmount())
-      .setTotalInterestAmount(HirePurchasePlan.getTotalInterestAmount())
-      .setTotalAmount(HirePurchasePlan.getTotalAmount())
-      .setEffectiveInterestRate(HirePurchasePlan.getEffectiveInterestRate())
-      .setNominalInterestRate(HirePurchasePlan.getNominalInterestRate())
-      .setFeeFirstRate(HirePurchasePlan.getFeeFirstRate())
-      .setFeePerRate(HirePurchasePlan.getFeePerRate())
-      .setMonthlyRate(HirePurchasePlan.getMonthlyRate())
-      .setLastRate(HirePurchasePlan.getLastRate())
+    installmentSecured.setNumberOfRates(InstallmentSecuredPlan.getNumberOfRates())
+      .setDayOfPurchase(InstallmentSecuredPlan.getDayOfPurchase())
+      .setOrderDate(InstallmentSecuredPlan.getOrderDate())
+      .setTotalPurchaseAmount(InstallmentSecuredPlan.getTotalPurchaseAmount())
+      .setTotalInterestAmount(InstallmentSecuredPlan.getTotalInterestAmount())
+      .setTotalAmount(InstallmentSecuredPlan.getTotalAmount())
+      .setEffectiveInterestRate(InstallmentSecuredPlan.getEffectiveInterestRate())
+      .setNominalInterestRate(InstallmentSecuredPlan.getNominalInterestRate())
+      .setFeeFirstRate(InstallmentSecuredPlan.getFeeFirstRate())
+      .setFeePerRate(InstallmentSecuredPlan.getFeePerRate())
+      .setMonthlyRate(InstallmentSecuredPlan.getMonthlyRate())
+      .setLastRate(InstallmentSecuredPlan.getLastRate())
 
     installmentSecured.setIban("DE46940594210000012345")
       .setBic("COBADEFFXXX")
@@ -105,22 +105,22 @@ describe('InstallmentSecured test', () => {
   })
 
   it('should allow to update InstallmentSecured after creating InstallmentSecured payment type', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const InstallmentSecuredPlanList: Array<InstallmentSecuredPlan> = await unzer.fetchInstallmentSecuredPlan('100', 'EUR', '5.99', '2019-03-21')
     const installmentSecured: InstallmentSecured = new InstallmentSecured()
-    const HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
+    const InstallmentSecuredPlan: InstallmentSecuredPlan = InstallmentSecuredPlanList[0]
 
-    installmentSecured.setNumberOfRates(HirePurchasePlan.getNumberOfRates())
-      .setDayOfPurchase(HirePurchasePlan.getDayOfPurchase())
-      .setOrderDate(HirePurchasePlan.getOrderDate())
-      .setTotalPurchaseAmount(HirePurchasePlan.getTotalPurchaseAmount())
-      .setTotalInterestAmount(HirePurchasePlan.getTotalInterestAmount())
-      .setTotalAmount(HirePurchasePlan.getTotalAmount())
-      .setEffectiveInterestRate(HirePurchasePlan.getEffectiveInterestRate())
-      .setNominalInterestRate(HirePurchasePlan.getNominalInterestRate())
-      .setFeeFirstRate(HirePurchasePlan.getFeeFirstRate())
-      .setFeePerRate(HirePurchasePlan.getFeePerRate())
-      .setMonthlyRate(HirePurchasePlan.getMonthlyRate())
-      .setLastRate(HirePurchasePlan.getLastRate())
+    installmentSecured.setNumberOfRates(InstallmentSecuredPlan.getNumberOfRates())
+      .setDayOfPurchase(InstallmentSecuredPlan.getDayOfPurchase())
+      .setOrderDate(InstallmentSecuredPlan.getOrderDate())
+      .setTotalPurchaseAmount(InstallmentSecuredPlan.getTotalPurchaseAmount())
+      .setTotalInterestAmount(InstallmentSecuredPlan.getTotalInterestAmount())
+      .setTotalAmount(InstallmentSecuredPlan.getTotalAmount())
+      .setEffectiveInterestRate(InstallmentSecuredPlan.getEffectiveInterestRate())
+      .setNominalInterestRate(InstallmentSecuredPlan.getNominalInterestRate())
+      .setFeeFirstRate(InstallmentSecuredPlan.getFeeFirstRate())
+      .setFeePerRate(InstallmentSecuredPlan.getFeePerRate())
+      .setMonthlyRate(InstallmentSecuredPlan.getMonthlyRate())
+      .setLastRate(InstallmentSecuredPlan.getLastRate())
 
     installmentSecured.setIban("DE46940594210000012345")
       .setBic("COBADEFFXXX")
@@ -128,40 +128,40 @@ describe('InstallmentSecured test', () => {
       .setInvoiceDate('2019-08-10')
       .setInvoiceDueDate('2020-08-30')
 
-    const InstallmentSecuredOriginal = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
-    const InstallmentSecuredPaymentId: string = InstallmentSecuredOriginal.getId()
-    const InstallmentSecuredUpdated = await unzer.updateHirePurchase(InstallmentSecuredPaymentId, getUpdateHirePurchase('Michael Jordan', '2020-12-12')) 
+    const installmentSecuredOriginal = await unzer.createPaymentType(installmentSecured) as InstallmentSecured
+    const installmentSecuredPaymentId: string = installmentSecuredOriginal.getId()
+    const installmentSecuredUpdated = await unzer.updateInstallmentSecured(installmentSecuredPaymentId, getUpdateInstallmentSecured('Michael Jordan', '2020-12-12')) 
     
-    expect(InstallmentSecuredOriginal.getAccountHolder()).not.toBe(InstallmentSecuredUpdated.getAccountHolder())
-    expect(InstallmentSecuredOriginal.getAccountHolder()).toBe('Rene Felder')
-    expect(InstallmentSecuredUpdated.getAccountHolder()).toBe('Michael Jordan')
+    expect(installmentSecuredOriginal.getAccountHolder()).not.toBe(installmentSecuredUpdated.getAccountHolder())
+    expect(installmentSecuredOriginal.getAccountHolder()).toBe('Rene Felder')
+    expect(installmentSecuredUpdated.getAccountHolder()).toBe('Michael Jordan')
 
-    expect(InstallmentSecuredOriginal.getInvoiceDueDate()).not.toEqual(InstallmentSecuredUpdated.getInvoiceDueDate())
-    expect(InstallmentSecuredOriginal.getInvoiceDueDate()).toBe('2020-08-30')
-    expect(InstallmentSecuredUpdated.getInvoiceDueDate()).toBe('2020-12-12')
+    expect(installmentSecuredOriginal.getInvoiceDueDate()).not.toEqual(installmentSecuredUpdated.getInvoiceDueDate())
+    expect(installmentSecuredOriginal.getInvoiceDueDate()).toBe('2020-08-30')
+    expect(installmentSecuredUpdated.getInvoiceDueDate()).toBe('2020-12-12')
 
-    expect(InstallmentSecuredOriginal.getInvoiceDate()).not.toEqual(InstallmentSecuredUpdated.getInvoiceDate())
-    expect(InstallmentSecuredOriginal.getIban()).not.toEqual(InstallmentSecuredUpdated.getIban())
-    expect(InstallmentSecuredOriginal.getBic()).not.toEqual(InstallmentSecuredUpdated.getBic())
+    expect(installmentSecuredOriginal.getInvoiceDate()).not.toEqual(installmentSecuredUpdated.getInvoiceDate())
+    expect(installmentSecuredOriginal.getIban()).not.toEqual(installmentSecuredUpdated.getIban())
+    expect(installmentSecuredOriginal.getBic()).not.toEqual(installmentSecuredUpdated.getBic())
   })
 
   it('Test fetch InstallmentSecured', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const InstallmentSecuredPlanList: Array<InstallmentSecuredPlan> = await unzer.fetchInstallmentSecuredPlan('100', 'EUR', '5.99', '2019-03-21')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
-    let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
+    let InstallmentSecuredPlan: InstallmentSecuredPlan = InstallmentSecuredPlanList[0]
 
-    installmentSecured.setNumberOfRates(HirePurchasePlan.getNumberOfRates())
-      .setDayOfPurchase(HirePurchasePlan.getDayOfPurchase())
-      .setOrderDate(HirePurchasePlan.getOrderDate())
-      .setTotalPurchaseAmount(HirePurchasePlan.getTotalPurchaseAmount())
-      .setTotalInterestAmount(HirePurchasePlan.getTotalInterestAmount())
-      .setTotalAmount(HirePurchasePlan.getTotalAmount())
-      .setEffectiveInterestRate(HirePurchasePlan.getEffectiveInterestRate())
-      .setNominalInterestRate(HirePurchasePlan.getNominalInterestRate())
-      .setFeeFirstRate(HirePurchasePlan.getFeeFirstRate())
-      .setFeePerRate(HirePurchasePlan.getFeePerRate())
-      .setMonthlyRate(HirePurchasePlan.getMonthlyRate())
-      .setLastRate(HirePurchasePlan.getLastRate())
+    installmentSecured.setNumberOfRates(InstallmentSecuredPlan.getNumberOfRates())
+      .setDayOfPurchase(InstallmentSecuredPlan.getDayOfPurchase())
+      .setOrderDate(InstallmentSecuredPlan.getOrderDate())
+      .setTotalPurchaseAmount(InstallmentSecuredPlan.getTotalPurchaseAmount())
+      .setTotalInterestAmount(InstallmentSecuredPlan.getTotalInterestAmount())
+      .setTotalAmount(InstallmentSecuredPlan.getTotalAmount())
+      .setEffectiveInterestRate(InstallmentSecuredPlan.getEffectiveInterestRate())
+      .setNominalInterestRate(InstallmentSecuredPlan.getNominalInterestRate())
+      .setFeeFirstRate(InstallmentSecuredPlan.getFeeFirstRate())
+      .setFeePerRate(InstallmentSecuredPlan.getFeePerRate())
+      .setMonthlyRate(InstallmentSecuredPlan.getMonthlyRate())
+      .setLastRate(InstallmentSecuredPlan.getLastRate())
 
     installmentSecured.setIban("DE46940594210000012345")
       .setBic("COBADEFFXXX")
@@ -176,22 +176,22 @@ describe('InstallmentSecured test', () => {
   })
 
   it('Test geolocation', async () => {
-    const HirePurchasePlanList: Array<HirePurchasePlan> = await unzer.fetchHirePurchasePlan('100', 'EUR', '5.99', '2019-03-21')
+    const InstallmentSecuredPlanList: Array<InstallmentSecuredPlan> = await unzer.fetchInstallmentSecuredPlan('100', 'EUR', '5.99', '2019-03-21')
     let installmentSecured: InstallmentSecured = new InstallmentSecured()
-    let HirePurchasePlan: HirePurchasePlan = HirePurchasePlanList[0]
+    let InstallmentSecuredPlan: InstallmentSecuredPlan = InstallmentSecuredPlanList[0]
 
-    installmentSecured.setNumberOfRates(HirePurchasePlan.getNumberOfRates())
-      .setDayOfPurchase(HirePurchasePlan.getDayOfPurchase())
-      .setOrderDate(HirePurchasePlan.getOrderDate())
-      .setTotalPurchaseAmount(HirePurchasePlan.getTotalPurchaseAmount())
-      .setTotalInterestAmount(HirePurchasePlan.getTotalInterestAmount())
-      .setTotalAmount(HirePurchasePlan.getTotalAmount())
-      .setEffectiveInterestRate(HirePurchasePlan.getEffectiveInterestRate())
-      .setNominalInterestRate(HirePurchasePlan.getNominalInterestRate())
-      .setFeeFirstRate(HirePurchasePlan.getFeeFirstRate())
-      .setFeePerRate(HirePurchasePlan.getFeePerRate())
-      .setMonthlyRate(HirePurchasePlan.getMonthlyRate())
-      .setLastRate(HirePurchasePlan.getLastRate())
+    installmentSecured.setNumberOfRates(InstallmentSecuredPlan.getNumberOfRates())
+      .setDayOfPurchase(InstallmentSecuredPlan.getDayOfPurchase())
+      .setOrderDate(InstallmentSecuredPlan.getOrderDate())
+      .setTotalPurchaseAmount(InstallmentSecuredPlan.getTotalPurchaseAmount())
+      .setTotalInterestAmount(InstallmentSecuredPlan.getTotalInterestAmount())
+      .setTotalAmount(InstallmentSecuredPlan.getTotalAmount())
+      .setEffectiveInterestRate(InstallmentSecuredPlan.getEffectiveInterestRate())
+      .setNominalInterestRate(InstallmentSecuredPlan.getNominalInterestRate())
+      .setFeeFirstRate(InstallmentSecuredPlan.getFeeFirstRate())
+      .setFeePerRate(InstallmentSecuredPlan.getFeePerRate())
+      .setMonthlyRate(InstallmentSecuredPlan.getMonthlyRate())
+      .setLastRate(InstallmentSecuredPlan.getLastRate())
 
     installmentSecured.setIban("DE46940594210000012345")
       .setBic("COBADEFFXXX")

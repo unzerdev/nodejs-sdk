@@ -13,6 +13,11 @@ export default (basketId: string, paymentService: PaymentService): Promise<Baske
           paymentService.getUnzer().getPrivateKey()
         )
 
+      if(response.isError) {
+        reject(response.errors)
+        return
+      }
+
       const newBasket = new Basket()
       newBasket.setId(response.id)
       
@@ -32,7 +37,9 @@ export default (basketId: string, paymentService: PaymentService): Promise<Baske
       newBasket.setNote(response.note)
 
       // Set baskset Items
-      response.basketItems.map((item:basketItemObject) => newBasket.addItem(item))
+      if(response.basketItems) {
+        response.basketItems.map((item:basketItemObject) => newBasket.addItem(item))
+      }
 
       // Set payload
       newBasket.setPayload(response)

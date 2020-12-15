@@ -11,14 +11,14 @@ import { chargeObject } from '../../src/payments/business/Charge'
 import { cancelChargeObject, cancelAuthorizeObject } from '../../src/payments/business/Cancel'
 import Resources from '../../src/payments/business/Resources'
 import { payoutObject } from '../../src/payments/business/Payout'
-import { updateHirePurchaseObject } from '../../src/payments/types/HirePurchase'
+import { updateInstallmentSecuredObject } from '../../src/payments/types/InstallmentSecured'
 import Shipment from '../../src/payments/business/Shipment'
 import { recurringObject } from '../../src/payments/business/Recurring'
 import { webhookObject } from '../../src/payments/business/Webhook'
 
 export const getTimeout = () => 60000
 
-export const createUnzerInstance = () => new Unzer('s-priv-2a104MLt3Mm0ZVJAf0URjJphuPfYVUdF', 'en')
+export const createUnzerInstance = () => new Unzer('s-priv-2a10EmKm5bVDM29xUEhWuMMiOCNrtxNj', 'en')
 
 export const createPaymentTypeCard = (unzer) => async (builder: boolean = false): Promise<Card> => {
   let card: Card = new Card()
@@ -285,8 +285,8 @@ export const getCancelChargeHirePurchase = (paymentId: string, chargeId: string,
   return cancelCharge
 }
 
-export const getUpdateHirePurchase = (accountHolder: string, invoiceDueDate: string) => {
-  const updateHirePurchaseObject: updateHirePurchaseObject = {
+export const getUpdateInstallmentSecured = (accountHolder: string, invoiceDueDate: string) => {
+  const updateHirePurchaseObject: updateInstallmentSecuredObject = {
     accountHolder: accountHolder,
     invoiceDueDate: invoiceDueDate,
     iban: 'DE65500105174522535755',
@@ -338,7 +338,7 @@ export const createBasket = () => {
   const basketItem: basketItemObject = {
     title: "Macbook Pro",
     subTitle: "This is brand new Mid 2019 version",
-    imageUrl: "https://www.heidelpay.com/typo3conf/ext/heidelpay_site/Resources/Public/Images/Heidelpay-Logo_weiss.svg",
+    imageUrl: "https://dev-hpp-images.s3.amazonaws.com/1222/bsk_2_4DA2BA1D090870903E76888299A404185960B58F05734F3044E96B7FBECDBA09.png",
     basketItemReferenceId: "12345",
     unit: "Pc.",
     quantity: 1,

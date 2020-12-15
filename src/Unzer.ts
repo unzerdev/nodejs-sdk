@@ -15,8 +15,8 @@ import Payment from './payments/business/Payment'
 import AbstractPaymentType from './payments/types/AbstractPaymentType'
 import Shipment, { shipmentObject } from './payments/business/Shipment'
 import Recurring, { recurringObject } from './payments/business/Recurring'
-import HirePurchasePlan from './payments/types/HirePurchasePlan'
-import HirePurchase, { updateHirePurchaseObject } from './payments/types/HirePurchase'
+import InstallmentSecuredPlan from './payments/types/InstallmentSecuredPlan'
+import InstallmentSecured, { updateInstallmentSecuredObject } from './payments/types/InstallmentSecured'
 import Webhook, { webhookObject } from './payments/business/Webhook'
 
 export default class Unzer {
@@ -415,20 +415,27 @@ export default class Unzer {
   }
 
   /**
-   * Fetch hire purchase plans
+   * Fetch installment secured plan
    *
    * @param {string} amount
    * @param {string} currency
    * @param {string} effectiveInterestRate
    * @param {string} orderDate
-   * @returns {Promise<Payout>}
+   * @returns {Promise<Array<InstallmentSecuredPlan>}
    */
-  public fetchHirePurchasePlan(amount: string, currency: string, effectiveInterestRate: string, orderDate: string): Promise<Array<HirePurchasePlan>> {
-    return this.paymentService.fetchHirePurchasePlan(amount, currency, effectiveInterestRate, orderDate)
+  public fetchInstallmentSecuredPlan(amount: string, currency: string, effectiveInterestRate: string, orderDate: string): Promise<Array<InstallmentSecuredPlan>> {
+    return this.paymentService.fetchInstallmentSecuredPlan(amount, currency, effectiveInterestRate, orderDate)
   }
 
-  public updateHirePurchase(hirePurchaseId: string, hirePurchase: updateHirePurchaseObject): Promise<HirePurchase> {
-    return this.paymentService.updateHirePurchase(hirePurchaseId, hirePurchase)
+  /**
+   * Update installment secured plan
+   *
+   * @param {string} installmentSecuredId
+   * @param {updateInstallmentSecuredObject} installmentSecured
+   * @returns {Promise<InstallmentSecured>}
+   */
+  public updateInstallmentSecured(installmentSecuredId: string, installmentSecured: updateInstallmentSecuredObject): Promise<InstallmentSecured> {
+    return this.paymentService.updateInstallmentSecured(installmentSecuredId, installmentSecured)
   }
 
   /**

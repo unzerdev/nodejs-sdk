@@ -14,7 +14,7 @@ describe('Payment Test', () => {
   })
 
   it('Unzer is instantiable', () => {
-    expect(unzer).toBeInstanceOf(unzer)
+    expect(unzer).toBeInstanceOf(Unzer)
   })
 
   it('Test returned traceId', async () => {

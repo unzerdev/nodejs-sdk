@@ -3,7 +3,7 @@ import * as TestHelper from '../../helpers/TestHelper'
 import * as TestCustomerHelper from '../../helpers/CustomerTestHelper'
 import Payout from '../../../src/payments/business/Payout'
 import SepaDirectDebit from '../../../src/payments/types/SepaDirectDebit'
-import SepaDirectDebitGuaranteed from '../../../src/payments/types/SepaDirectDebitGuaranteed'
+import SepaDirectDebitSecured from '../../../src/payments/types/SepaDirectDebitSecured'
 import { Customer } from '../../../src/payments/Customer'
 import Payment from '../../../src/payments/business/Payment'
 
@@ -26,26 +26,12 @@ describe('Payout test', () => {
       .setHolder("Rene Felder")
   }
 
-  const getSepaDirectDebitGuaranteed = () => {
-    return new SepaDirectDebitGuaranteed()
+  const getSepaDirectDebitSecured = () => {
+    return new SepaDirectDebitSecured()
       .setIban("DE89370400440532013000")
       .setBic("COBADEFFXXX")
       .setHolder("Rene Felder")
   }
-
-  it('Test payout with Credit Card', async () => {
-    const card = await createPaymentTypeCard()
-    const payout: Payout = await unzer.payout(getPayout(card.getId()))
-
-    expect(payout).toBeInstanceOf(Payout)
-    expect(payout.getId()).toBeDefined()
-    expect(payout.getAmount()).toBeDefined()
-    expect(payout.getCurrency()).toBeDefined()
-    expect(payout.getReturnUrl()).toBeDefined()
-    expect(payout.getPaymentReference()).toBeDefined()
-    expect(payout.getResources()).toBeDefined()
-    expect(payout.getPayload()).toBeDefined()
-  })
 
   it('Test payout with Sepa Direct Debit', async () => {
     const sepaDirectDebit: SepaDirectDebit = await unzer.createPaymentType(getSepaDirectDebit()) as SepaDirectDebit
@@ -61,10 +47,10 @@ describe('Payout test', () => {
     expect(payout.getPayload()).toBeDefined()
   })
 
-  it('Test payout with Sepa Direct Debit Guaranteed', async () => {
+  it('Test payout with Sepa Direct Debit Secured', async () => {
     const customer: Customer = await unzer.createCustomer(createFullCustomer())
-    const sepaDirectDebitGuaranteed: SepaDirectDebitGuaranteed = await unzer.createPaymentType(getSepaDirectDebitGuaranteed()) as SepaDirectDebitGuaranteed
-    const payout: Payout = await unzer.payout(getPayout(sepaDirectDebitGuaranteed.getId(), customer.getCustomerId()))
+    const sepaDirectDebitSecured: SepaDirectDebitSecured = await unzer.createPaymentType(getSepaDirectDebitSecured()) as SepaDirectDebitSecured
+    const payout: Payout = await unzer.payout(getPayout(sepaDirectDebitSecured.getId(), customer.getCustomerId()))
 
     expect(payout).toBeInstanceOf(Payout)
     expect(payout.getId()).toBeDefined()
@@ -74,47 +60,5 @@ describe('Payout test', () => {
     expect(payout.getPaymentReference()).toBeDefined()
     expect(payout.getResources()).toBeDefined()
     expect(payout.getPayload()).toBeDefined()
-  })
-
-  it('Test fetch Payout payment', async () => {
-    const card = await createPaymentTypeCard()
-    const payout: Payout = await unzer.payout(getPayout(card.getId()))
-
-    const payment: Payment = await unzer.fetchPayment(payout.getResources().getPaymentId()) as Payment
-
-    expect(payout).toBeInstanceOf(Payout)
-    expect(payment.getResources()).toBeDefined()
-    expect(payout.getId()).toBeDefined()
-    expect(payout.getAmount()).toBeDefined()
-    expect(payout.getCurrency()).toBeDefined()
-    expect(payout.getReturnUrl()).toBeDefined()
-    expect(payout.getPaymentReference()).toBeDefined()
-    expect(payout.getResources()).toBeDefined()
-    expect(payout.getPayload()).toBeDefined()
-  })
-
-  it('Test fetch a Payout object', async () => {
-    const card = await createPaymentTypeCard()
-    const payout: Payout = await unzer.payout(getPayout(card.getId()))
-
-    const fetchedPayout: Payout = await unzer.fetchPayout(payout.getResources().getPaymentId(), payout.getId()) as Payout
-
-    expect(payout).toBeInstanceOf(Payout)
-    expect(fetchedPayout).toBeInstanceOf(Payout)
-    expect(fetchedPayout.getResources()).toBeDefined()
-    expect(fetchedPayout.getId()).toBeDefined()
-    expect(fetchedPayout.getAmount()).toBeDefined()
-    expect(fetchedPayout.getCurrency()).toBeDefined()
-    expect(fetchedPayout.getReturnUrl()).toBeDefined()
-    expect(fetchedPayout.getPaymentReference()).toBeDefined()
-    expect(fetchedPayout.getResources()).toBeDefined()
-    expect(fetchedPayout.getPayload()).toBeDefined()
-  })
-
-  it('Test returned traceId', async () => {
-    const card = await createPaymentTypeCard()
-    const payout: Payout = await unzer.payout(getPayout(card.getId()))
-
-    expect(payout.getResources().getTraceId()).toBeDefined()
   })
 })

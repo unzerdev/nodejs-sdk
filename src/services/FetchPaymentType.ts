@@ -13,7 +13,7 @@ export default (typeId: string, paymentService: PaymentService): Promise<Payment
       paymentType.setUnzer(paymentService.getUnzer())
 
       // Parse URL with parameters
-      const requestUrl = `${paymentType.getTypeUrl()}/${typeId}`
+      const requestUrl = `/types/${typeId}`
 
       // Call api end point to get response
       const response: any = await paymentService

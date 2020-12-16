@@ -33,7 +33,10 @@ export default (paymentId: string, paymentService: PaymentService): Promise<Paym
       payment.setResources(response.resources)
 
       // Fetch authorization transaction and set to payment object
-      payment.setAuthorization(await _fetchAuthorization(response.transactions, paymentService))
+      const authorizeItem = await _fetchAuthorization(response.transactions, paymentService)
+      if(authorizeItem) {
+        payment.setAuthorization(authorizeItem)
+      }
 
       // Fetch cancel list transaction and set to payment object
       payment.setCancelList(await _fetchCancelList(payment, response.transactions, paymentService))
@@ -56,13 +59,14 @@ export default (paymentId: string, paymentService: PaymentService): Promise<Paym
 const _fetchAuthorization = (
   transactions: any,
   paymentService: PaymentService
-): Promise<Authorization> => {
+): Promise<Authorization | null> => {
   return new Promise(async (resolve, reject) => {
     // Find transaction authorize in list of transactions
     const authorizeItem = transactions.find((item: any) => item.type === 'authorize')
 
     if (typeof authorizeItem === 'undefined') {
-      reject() // No authorize Item found
+      resolve(null)
+      return // No authorize Item found
     } else {
       // Call Authorization service to fetch transaction
       const authorization: Authorization = await FetchAuthorization(

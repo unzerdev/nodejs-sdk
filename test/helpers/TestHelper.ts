@@ -15,6 +15,7 @@ import { updateInstallmentSecuredObject } from '../../src/payments/types/Install
 import Shipment from '../../src/payments/business/Shipment'
 import { recurringObject } from '../../src/payments/business/Recurring'
 import { webhookObject } from '../../src/payments/business/Webhook'
+import * as CustomerTestHelper from './CustomerTestHelper'
 
 export const getTimeout = () => 60000
 
@@ -26,6 +27,38 @@ export const createPaymentTypeCard = (unzer) => async (builder: boolean = false)
     .setCVC('123')
     .setExpiryDate('01/2022')
     .set3ds(false)
+
+  if (builder) {
+    return card
+  }
+
+  card = await unzer.createPaymentType(card)
+  return card
+}
+
+export const createPaymentTypeCardWithEmail = (unzer) => async (builder: boolean = false): Promise<Card> => {
+  let card: Card = new Card()
+    .setNumber('4711100000000000')
+    .setCVC('123')
+    .setExpiryDate('01/2022')
+    .set3ds(false)
+    .setEmail('max.mustermann@unzer.com')
+
+  if (builder) {
+    return card
+  }
+
+  card = await unzer.createPaymentType(card)
+  return card
+}
+
+export const createPaymentTypeCardWithInvalidEmail = (unzer) => async (builder: boolean = false): Promise<Card> => {
+  let card: Card = new Card()
+    .setNumber('4711100000000000')
+    .setCVC('123')
+    .setExpiryDate('01/2022')
+    .set3ds(false)
+    .setEmail('test_email')
 
   if (builder) {
     return card
@@ -547,11 +580,15 @@ export const getRequiredRecurringData = () => {
   return recurringPayload
 }
 
-export const getCompleteRecurringData = () => {
+export const getCompleteRecurringData = async (unzer) => {
+  const createCustomer = CustomerTestHelper.createCustomer(unzer)
+  const metadata: Metadata = await unzer.createMetadata(createMetadataValue())
+  const customer: Customer = await createCustomer()
+
   const recurringPayload: recurringObject = {
     returnUrl: 'https://dev.unzer.com',
-    customerId: 's-cst-cfb84f279366',
-    metadataId: 's-mtd-h6kvv7x9nalw',
+    customerId: customer.getCustomerId(),
+    metadataId: metadata.getId(),
   }
 
   return recurringPayload

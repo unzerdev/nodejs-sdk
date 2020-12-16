@@ -124,6 +124,7 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
         .setCVC(response.cvc)
         .setBrand(response.brand)
         .setRecurring(response.recurring)
+      
 
       if (response.cardHolder) {
         card.setCardHolder(response.cardHolder)
@@ -131,6 +132,10 @@ export const mapResponsePaymentType = (response: any): AbstractPaymentType => {
 
       if (response.cardDetails) {
         card.setCardDetails(response.cardDetails)
+      }
+      
+      if (response.email) {
+        card.setEmail(response.email)
       }
 
       card.setId(response.id)

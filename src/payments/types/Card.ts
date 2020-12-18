@@ -9,6 +9,7 @@ export default class Card extends AbstractPaymentType implements PaymentType {
   private _cvc: string
   private _expiryDate: string
   private _cardHolder: string
+  private _email: string
   private _3ds: boolean
   private _cardDetails: any
 
@@ -43,6 +44,10 @@ export default class Card extends AbstractPaymentType implements PaymentType {
 
     if(this.get3ds() !== undefined) {
       payload['3ds'] = this.get3ds()
+    }
+
+    if(this.getEmail() !== undefined) {
+      payload['email'] = this.getEmail()
     }
 
     return payload
@@ -126,6 +131,26 @@ export default class Card extends AbstractPaymentType implements PaymentType {
    */
   public getCardHolder(): string {
     return this._cardHolder
+  }
+
+  /**
+   * Set email
+   *
+   * @param {string} email
+   * @returns {Card}
+   */
+  public setEmail(email: string): Card {
+    this._email = email
+    return this
+  }
+
+  /**
+   * Get email
+   *
+   * @returns {string}
+   */
+  public getEmail(): string {
+    return this._email
   }
 
   /**

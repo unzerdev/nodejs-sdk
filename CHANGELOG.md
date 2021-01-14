@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## [1.1.0](https://github.com/unzerdev/nodejs-sdk/compare/06f708142870f956d4f6ba23a55e244285f69bd9..develop)
+### Added
+* Add email property to payment type card to meet 3Ds2.x regulations.
+* Several minor changes.
+
 ## [1.0.0](https://github.com/unzerdev/nodejs-sdk/compare/6e0de48882482e428500bad68c812a504104e283..develop)
 
 ### Added
